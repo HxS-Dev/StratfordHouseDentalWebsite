@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Inter Display';
+  src: url('/fonts/InterDisplay-Medium.woff2') format('woff2'),
+    url('/fonts/InterDisplay-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter Display';
+  src: url('/fonts/InterDisplay-SemiBold.woff2') format('woff2'),
+    url('/fonts/InterDisplay-SemiBold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter Display';
+  src: url('/fonts/InterDisplay-Regular.woff2') format('woff2'),
+    url('/fonts/InterDisplay-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+html{
+  scroll-behavior: smooth;
+}
+
+@theme {
+  --font-inter-display: "Inter Display";
+  --font-inter: "Inter";
+  --shadow-3xl: 0px 1px 2px 0px rgba(10, 13, 18, 0.05);
+  --shadow-4xl: 0px 1px 3px 0px rgba(13, 13, 18, 0.05), 0px 1px 2px 0px rgba(13, 13, 18, 0.04);
+  --color-gray-1000: #E8F5FC;
+  --color-primary: #0e547b;
+  --color-blue-1000: #126C9F;
+  --color-blue-1100: #0B405E;
+  --color-blue-1200: #0E547B;
+  --color-blue-1300: #181D27;
+  --color-blue-1400: #48ADE6;
+  --color-blue-1500: #96D0F1;
+  --color-grayscale-900: #0D0D12;
+  --color-grayscale-500: #666D80;
+  --color-gray-1100: #EAECF0;
+  --color-gray-1200: #D5D7DA;
+  --color-gray-1300: #E3E8EF;
+  --color-gray-1400: #FAFAFA;
+  --color-tertiary-600: #535862;
+  --color-gray-1500: #717680;
+  --breakpoint-sm: 575px;
+  --breakpoint-md: 767px;
+  --breakpoint-lg: 991px;
+  --breakpoint-xl: 1199px;
+  --breakpoint-2xl: 1365px;
+  --breakpoint-3xl: 1600px;
+}
+
+.testimonails-sec .swiper-wrapper {
+  padding: 53px 0px;
+}
+
+.swiper-pagination-bullet {
+  background: rgba(217, 217, 217, 0.50) !important;
+  opacity: 1 !important;
+}
+
+.swiper-pagination-bullet.swiper-pagination-bullet-active {
+  background: rgba(217, 217, 217, 1) !important;
+}
+
+.swiper-pagination {
+  text-align: start !important;
+  left: 62px !important;
+  bottom: 145px !important;
+}
+
+@media screen and (max-width: 991px) {
+  .swiper-pagination {
+    text-align: center !important;
+    left: 0px !important;
+    bottom: 35px !important;
+  }
+
+  .testimonails-sec .swiper-wrapper {
+    padding: 0px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .swiper-pagination {
+    bottom: 20px !important;
+  }
+}
+
+.text-limit {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.prose-right > h3,
+.prose-right > h4,
+.prose-right > h5, 
+.prose-right > h6{
+  @apply  lg:w-[42%] text-blue-1300 font-semibold
+}
+
+.prose-right > h2{
+  @apply lg:text-[30px] text-2xl font-semibold my-3 text-blue-1300 lg:w-[42%]
+}
+
+.prose-right p{
+  @apply lg:text-lg text-base mb-5 text-tertiary-600 lg:w-[42%]
+}
+
+.prose-right .img-wrap-cms{
+  @apply lg:right-0 lg:absolute lg:top-1/2 lg:-translate-y-1/2
+}
+
+
+.prose-left > h3,
+.prose-left > h4,
+.prose-left > h5, 
+.prose-left > h6{
+  @apply  lg:w-[42%] text-blue-1300 font-semibold
+}
+
+.prose-left > h2{
+  @apply lg:text-[30px] text-2xl font-semibold my-3 text-blue-1300 lg:w-[42%]
+}
+
+.prose-left p{
+  @apply lg:text-lg text-base mb-5 text-tertiary-600 lg:w-[42%]
+}
+
+.prose-left .img-wrap-cms{
+  @apply lg:left-0 lg:absolute lg:top-1/2 lg:-translate-y-1/2
+}
