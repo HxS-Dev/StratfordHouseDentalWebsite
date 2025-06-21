@@ -64,7 +64,8 @@ const components: PortableTextComponents = {
 
 
 export default async function ArticlePage({ params }: PageProps) {
-  const treatments = await sanityClient.fetch(treatmentsBySlugQuery, { slug: params.slug })
+  const resolvedParams = await params; // Resolve the Promise
+  const treatments = await sanityClient.fetch(treatmentsBySlugQuery, { slug: resolvedParams.slug })
 
   const titleParts = [
     { tag: "h1" as const, text: treatments?.title || "Treatments" },
