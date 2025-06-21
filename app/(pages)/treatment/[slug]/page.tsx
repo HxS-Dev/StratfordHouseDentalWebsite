@@ -22,6 +22,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 }
 
+export async function generateStaticParams() {
+  const slugs = await sanityClient.fetch(treatmentsBySlugQuery);
+
+  return slugs.map((slug: { current: string }) => ({
+    slug: slug.current,
+  }));
+}
 
 const components: PortableTextComponents = {
   block: {
