@@ -12,6 +12,13 @@ type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
+export async function generateStaticParams() {
+  const slugs = await sanityClient.fetch(`*[_type == "article"]{ "slug": slug.current }`);
+
+  return slugs.map((slug: { slug: string }) => ({
+    slug: slug.slug,
+  }));
+}
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const resolvedParams = await params; // Resolve the Promise
