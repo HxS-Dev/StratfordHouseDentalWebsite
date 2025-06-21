@@ -9,10 +9,8 @@ import { PortableText } from '@portabletext/react'
 import { PortableTextComponents } from '@portabletext/react'
 
 type PageProps = {
-  params: {
-    slug: string;
-  };
-}
+  params: Promise<{ slug: string }>;
+};
 
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
