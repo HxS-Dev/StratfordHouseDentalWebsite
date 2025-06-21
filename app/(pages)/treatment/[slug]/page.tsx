@@ -13,7 +13,8 @@ type PageProps = {
 };
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const treatment = await sanityClient.fetch(treatmentsBySlugQuery, { slug: params.slug })
+  const resolvedParams = await params;
+  const treatment = await sanityClient.fetch(treatmentsBySlugQuery, { slug: resolvedParams.slug })
 
   return {
     title: treatment?.title || 'Treatments',

@@ -14,12 +14,13 @@ type PageProps = {
 
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const article = await sanityClient.fetch(articleBySlugQuery, { slug: params.slug })
+  const resolvedParams = await params; // Resolve the Promise
+  const article = await sanityClient.fetch(articleBySlugQuery, { slug: resolvedParams.slug });
 
   return {
     title: article?.title || 'Article',
     description: article?.description || '',
-  }
+  };
 }
 
 const components: PortableTextComponents = {
