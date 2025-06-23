@@ -3,7 +3,7 @@ const nextConfig = {
   images: {
     domains: ['flagcdn.com'],
   },
-  output: 'export',
+  output: 'standalone',
 }
 
 module.exports = nextConfig 
