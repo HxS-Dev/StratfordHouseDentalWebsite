@@ -1,6 +1,5 @@
 import React from 'react'
 import Link from 'next/link'
-import LangDropdown from './LangDropdown'
 function Footer() {
      return (
           <footer className='bg-blue-1200 md:pt-20 md:pb-14 py-12'>
@@ -72,7 +71,6 @@ function Footer() {
                          </div>
                     </div>
                     <div className='md:mt-14 mt-[38px] md:flex items-center justify-between md:pt-14 pt-[38px] border-t border-white/[10%]'>
-                         <LangDropdown/>
                          <p className='text-base md:mt-0 mt-3 text-white font-medium leading-6 tracking-[-0.32px]'>© Stratford Hours, All Rights Reserved</p>
                     </div>
                </div>
