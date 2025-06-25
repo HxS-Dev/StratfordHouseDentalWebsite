@@ -69,6 +69,45 @@ const components: PortableTextComponents = {
   },
 }
 
+// Helper to check if a PortableText value contains an image block
+function getImageBlock(blocks: any[] = []) {
+  return Array.isArray(blocks) ? blocks.find(block => block._type === 'image') : null;
+}
+
+function RenderSection({ value, index = 0 }: { value: any[], index?: number }) {
+  if (!value) return null;
+  const imageBlock = getImageBlock(value);
+  const textBlocks = value.filter((block: any) => block._type !== 'image');
+
+  if (imageBlock) {
+    // Alternate float direction based on index
+    const floatDirection: 'left' | 'right' = index % 2 === 0 ? 'left' : 'right';
+    // Responsive margin and float classes
+    const floatClass = floatDirection === 'left' ? 'md:float-left' : 'md:float-right';
+    const marginClass = floatDirection === 'left' ? 'md:mr-8' : 'md:ml-8';
+    return (
+      <div className="w-full max-w-[1200px] mx-auto my-12">
+        <div className="w-full">
+          <img
+            src={urlFor(imageBlock).url()}
+            alt={imageBlock.alt || ''}
+            className={`w-full max-w-[350px] max-h-[350px] object-contain rounded-xl shadow mb-4 ${floatClass} ${marginClass}`}
+            style={{ shapeOutside: 'margin-box', float: undefined }} // Remove float for mobile, handled by Tailwind for md+
+          />
+          <div className="prose max-w-none !leading-relaxed overflow-hidden">
+            <PortableText value={textBlocks} components={components} />
+          </div>
+        </div>
+      </div>
+    );
+  }
+  // No image: single column, but use the same max width as image sections
+  return (
+    <div className="prose max-w-none w-full max-w-[1200px] mx-auto !leading-relaxed my-12">
+      <PortableText value={value} components={components} />
+    </div>
+  );
+}
 
 export default async function ArticlePage({ params }: PageProps) {
   const resolvedParams = await params; // Resolve the Promise
@@ -115,30 +154,13 @@ export default async function ArticlePage({ params }: PageProps) {
             {treatments?.title}
           </h2>
           <p className='lg:text-lg text-base text-black pb-16'>{treatments?.description}</p>
-          <div className='prose max-w-none prose-right flex flex-col items-start justify-center relative lg:py-12 py-8'>
-            {treatments?.body && <PortableText value={treatments.body} components={components} />}
-          </div>
 
-          {treatments?.richText_row_1 && (
-            <div className='prose max-w-none prose-left flex flex-col items-end justify-center relative lg:py-12 py-8'>
-              <PortableText value={treatments.richText_row_1} components={components} />
-            </div>
-          )}
-         {treatments?.richText_row_2 && (
-          <div className='prose max-w-none prose-right flex flex-col items-start justify-center relative lg:py-12 py-8'>
-            {treatments?.body && <PortableText value={treatments.richText_row_2} components={components} />}
-          </div>
-             )}
-          {treatments?.richText_row_3 && (
-            <div className='prose max-w-none prose-left flex flex-col items-end justify-center relative lg:py-12 py-8'>
-              <PortableText value={treatments.richText_row_3} components={components} />
-            </div>
-          )}
-            {treatments?.richText_row_4 && (
-          <div className='prose max-w-none prose-right flex flex-col items-start justify-center relative lg:py-12 py-8'>
-            {treatments?.body && <PortableText value={treatments.richText_row_4} components={components} />}
-          </div>
-             )}
+          {/* Main body with alternating image float */}
+          {treatments?.body && <RenderSection value={treatments.body} index={0} />}
+          {treatments?.richText_row_1 && <RenderSection value={treatments.richText_row_1} index={1} />}
+          {treatments?.richText_row_2 && <RenderSection value={treatments.richText_row_2} index={2} />}
+          {treatments?.richText_row_3 && <RenderSection value={treatments.richText_row_3} index={3} />}
+          {treatments?.richText_row_4 && <RenderSection value={treatments.richText_row_4} index={4} />}
         </div>
       </section>
       <Contact />

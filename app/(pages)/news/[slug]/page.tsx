@@ -81,7 +81,7 @@ export default async function ArticlePage({ params }: PageProps) {
       <Header />
       <section className="bg-blue-1100 max-h-[287px] md:min-h-[287px] min-h-[165px] flex items-center relative">
         <div className="xl:max-w-[1270px] w-full max-w-[952px] relative md:px-5 px-4 mx-auto">
-          <h4 className='text-lg font-medium text-blue-1400 mb-2'>The Treatments We Offer</h4>
+          <h4 className='text-lg font-medium text-blue-1400 mb-2'>Our latest news</h4>
           {titleParts.map((part, i) => {
             const Tag = part.tag;
             const className =

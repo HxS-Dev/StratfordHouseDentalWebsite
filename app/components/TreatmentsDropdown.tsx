@@ -32,7 +32,7 @@ const TreatmentsDropdown = () => {
 
       <div className="absolute right-0 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-opacity-5 focus:outline-none opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
         <div className="py-1">
-          {treatments.slice(0, 8).map((treatment) => (
+          {treatments.map((treatment) => (
             <Link
               key={treatment._id}
               href={`/treatment/${treatment.slug.current}`}
@@ -40,7 +40,6 @@ const TreatmentsDropdown = () => {
             >
               {treatment.title}
             </Link>
-                
           ))}
         </div>
       </div>

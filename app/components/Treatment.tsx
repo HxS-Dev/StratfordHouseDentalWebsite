@@ -49,7 +49,7 @@ function Treatment() {
      if (loading) {
           return (
                <motion.div
-                 className="relative md:-mt-[232px] -mt-[100px] xl:max-w-[1270px] max-w-[952px] md:px-5 px-4 mx-auto"
+                 className="relative md:-mt-[232px] -mt-[100px] xl:max-w-[1270px] max-w-[952px] md:px-5 px-4 mx-auto "
                  initial={{ opacity: 0, y: 40 }}
                  animate={{ opacity: 1, y: 0 }}
                  transition={{ duration: 0.7 }}
@@ -93,7 +93,7 @@ function Treatment() {
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.7 }}
           >
-               <div className="flex gap-4 items-center md:justify-end justify-start">
+               <div className="flex gap-4 items-center md:justify-end justify-start padding-10">
                     <button
                          ref={prevRef}
                          className="custom-prev-button cursor-pointer transition-all duration-300 hover:bg-blue-1000 hover:border-transparent rounded-full md:w-[46px] w-10 md:h-[46px] h-10 border border-gray-1000 flex items-center justify-center"
@@ -124,30 +124,32 @@ function Treatment() {
                >
                     {treatments.slice(0, 10).map((treatment: any, idx: number) => (
                          <SwiperSlide key={treatment._id}>
-                         <Link href={`/treatment/${treatment.slug.current}`} >
-                              <motion.div
-                                className="w-full"
-                                whileHover={{ scale: 1.03, boxShadow: "0 8px 32px rgba(0,0,0,0.08)" }}
-                                transition={{ type: "spring", stiffness: 300 }}
-                              >
-                                   <motion.img
-                                        src={treatment.mainImage ? urlFor(treatment.mainImage).url() : "images/card-img1.png"}
-                                        alt={treatment.mainImage?.alt || treatment.title}
-                                        height={231}
-                                        className='w-full h-[231px] object-cover object-center'
-                                        initial={{ scale: 1.05, opacity: 0 }}
-                                        animate={{ scale: 1, opacity: 1 }}
-                                        transition={{ delay: 0.1 * idx, duration: 0.5 }}
-                                   />
-                                   <h4 className='text-2xl text-limit font-semibold leading-[130%] tracking-[-0.72px] mt-8 mb-3 text-grayscale-900'>
-                                        {treatment.title}
-                                   </h4>
-                                   <p className='text-lg font-normal leading-[150%] tracking-[-0.36px] text-grayscale-500'>
-                                        {treatment.description}
-                                   </p>
-                              </motion.div>
-                         </Link>
-                    </SwiperSlide>
+  <Link href={`/treatment/${treatment.slug.current}`} >
+    <motion.div
+      className="w-full bg-white h-full flex flex-col"
+      whileHover={{ scale: 1.03, boxShadow: "0 8px 32px rgba(0,0,0,0.08)" }}
+      transition={{ type: "spring", stiffness: 300 }}
+    >
+      <motion.img
+        src={treatment.mainImage ? urlFor(treatment.mainImage).url() : "images/card-img1.png"}
+        alt={treatment.mainImage?.alt || treatment.title}
+        height={231}
+        className='w-full h-[231px] object-cover object-center '
+        initial={{ scale: 1.05, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ delay: 0.1 * idx, duration: 0.5 }}
+      />
+      <div className="pt-6 pb-4 px-2 flex-1 flex flex-col">
+        <h4 className='text-2xl text-limit font-semibold leading-[130%] tracking-[-0.72px] mb-3 text-grayscale-900'>
+          {treatment.title}
+        </h4>
+        <p className='text-lg font-normal leading-[150%] tracking-[-0.36px] text-grayscale-500 line-clamp-3 min-h-[72px]'>
+          {treatment.description}
+        </p>
+      </div>
+    </motion.div>
+  </Link>
+</SwiperSlide>
                     ))}
                </Swiper>
           </motion.div>

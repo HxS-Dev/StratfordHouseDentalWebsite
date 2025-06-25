@@ -43,9 +43,10 @@ const TreatmentsWithPagination: React.FC<TreatmentsWithPaginationProps> = ({ tre
                        exit="hidden"
                        transition={{ delay: i * 0.10, duration: 0.5, type: "spring" }}
                        whileHover={{ scale: 1.04, boxShadow: "0 8px 32px 0 rgba(0, 60, 255, 0.10)" }}
+                       className="flex h-full"
                      >
                        <Link href={`/treatment/${treatment.slug.current}`}> 
-                         <div className="bg-white rounded-xl shadow-md border border-blue-100 overflow-hidden flex flex-col transition-all duration-200 hover:-translate-y-1 hover:shadow-xl">
+                         <div className="bg-white rounded-xl shadow-md border border-blue-100 overflow-hidden flex flex-col h-full transition-all duration-200 hover:-translate-y-1 hover:shadow-xl">
                            <img 
                              src={treatment.mainImage ? urlFor(treatment.mainImage).url() : "images/card-img1.png"} 
                              alt={treatment.mainImage?.alt || treatment.title} 
@@ -56,8 +57,10 @@ const TreatmentsWithPagination: React.FC<TreatmentsWithPaginationProps> = ({ tre
                              <h4 className='text-2xl text-limit font-semibold leading-[130%] tracking-[-0.72px] mb-3 text-blue-1300'>
                                {treatment.title}
                              </h4>
-                             <p className='text-lg font-normal leading-[150%] tracking-[-0.36px] text-gray-500 mb-4 flex-1'>
-                               {treatment.description}
+                             <p className='text-lg font-normal leading-[150%] tracking-[-0.36px] text-gray-500 mb-4 flex-1 line-clamp-3'>
+                               {treatment.description?.length > 160
+                                 ? treatment.description.slice(0, 157) + '...'
+                                 : treatment.description}
                              </p>
                              <span className="inline-block mt-auto text-blue-900 font-medium text-sm hover:underline transition-colors">Learn More →</span>
                            </div>
