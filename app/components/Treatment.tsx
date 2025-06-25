@@ -122,7 +122,7 @@ function Treatment() {
                     }}
                     className="mySwiper !overflow-visible md:mt-[34px] mt-4"
                >
-                    {treatments.slice(0, 10).map((treatment: any, idx: number) => (
+                    {treatments.map((treatment: any, idx: number) => (
                          <SwiperSlide key={treatment._id}>
   <Link href={`/treatment/${treatment.slug.current}`} >
     <motion.div
