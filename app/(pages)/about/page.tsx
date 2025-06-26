@@ -95,7 +95,6 @@ export default function About() {
         </div>
       </motion.section>
       <Appoinment />
-      <Contact />
       <Footer />
     </>
   );
