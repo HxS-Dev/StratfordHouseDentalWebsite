@@ -1,7 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
 import Button from "./components/Buttons";
-import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Testimonails from "./components/Testimonails";
@@ -28,8 +27,15 @@ export default function Home() {
             >
               <h1 className="xl:text-5xl md:text-4xl text-[32px] text-black lg:mx-0 mx-auto font-semibold leading-[120%] font-inter-display">Transform Your Smile, Transform Your Life</h1>
               <p className="xl:text-lg text-base text-black lg:mx-0 mx-auto max-w-[500px] leading-[150%] tracking-[-0.36px] md:mt-4 mt-2 mb-8">Expert dental care in a comfortable environment, using the latest technology to give you the healthy, beautiful smile you deserve.</p>
-              <motion.div  whileTap={{ scale: 0.95 }}>
-                <Button>Book Appointment Now</Button>
+              <motion.div whileTap={{ scale: 0.95 }}>
+                <a
+                  href="https://booking.uk.hsone.app/soe/new/%20?pid=UKELU03"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white md:text-base text-sm transtion ease-in-out duration-500 hover:text-blue-1000 hover:bg-transparent border border-blue-1000 font-medium leading-6 p-4 py-3 bg-blue-1000 inline-block"
+                >
+                  Book Appointment Now
+                </a>
               </motion.div>
             </motion.div>
             <motion.div 
@@ -137,10 +143,11 @@ export default function Home() {
               whileHover={{ y: -5, transition: { duration: 0.2 } }}
             >
               <img src="images/file-icon.svg" alt="" />
-              <h4 className="text-2xl font-semibold mt-5 leading-[130%] tracking-[-0.72px] text-grayscale-900">A Range of Treatments</h4>
-              <p className="text-base font-normal leading-6  mt-5 mb-2 tracking-[-0.32px] text-grayscale-500">We offer a range of preventative and restorative treatments to put the smile back on your face when pain strikes, as well as providing cosmetic dentistry to give you the confidence you deserve.</p>
-              <Link href="/" className="inline-flex w-fit transition-all duration-300 group items-center gap-2 text-base font-medium leading-[150%] text-blue-1200">Read More 
-              <img className="group-hover:translate-x-1 transition-all duration-300" src="images/chevron-right.svg" alt="no" /></Link>
+              <h4 className="text-2xl font-semibold mt-5 leading-[130%] tracking-[-0.72px] text-grayscale-900">Latest News</h4>
+              <p className="text-base font-normal leading-6  mt-5 mb-2 tracking-[-0.32px] text-grayscale-500">Stay up to date with our latest news, updates, and dental care tips from our expert team.</p>
+              <Link href="/news" className="inline-flex w-fit transition-all duration-300 group items-center gap-2 text-base font-medium leading-[150%] text-blue-1200">Read News
+                <img className="group-hover:translate-x-1 transition-all duration-300" src="images/chevron-right.svg" alt="" />
+              </Link>
             </motion.div>
             <motion.div
               className="border border-gray-1300 py-[54px] px-[34px]"
@@ -151,10 +158,11 @@ export default function Home() {
               whileHover={{ y: -5, transition: { duration: 0.2 } }}
             >
               <img src="images/wallet-icon.svg" alt="" />
-              <h4 className="text-2xl font-semibold mt-5 leading-[130%] tracking-[-0.72px] text-grayscale-900">A Range of Treatments</h4>
-              <p className="text-base font-normal leading-6  mt-5 mb-2 tracking-[-0.32px] text-grayscale-500">We offer a range of preventative and restorative treatments to put the smile back on your face when pain strikes, as well as providing cosmetic dentistry to give you the confidence you deserve.</p>
-              <Link href="/" className="inline-flex w-fit transition-all duration-300 group items-center gap-2 text-base font-medium leading-[150%] text-blue-1200">Read More 
-              <img className="group-hover:translate-x-1 transition-all duration-300" src="images/chevron-right.svg" alt="no" /></Link>
+              <h4 className="text-2xl font-semibold mt-5 leading-[130%] tracking-[-0.72px] text-grayscale-900">Dental Fees</h4>
+              <p className="text-base font-normal leading-6  mt-5 mb-2 tracking-[-0.32px] text-grayscale-500">Explore our transparent dental fees and payment options to plan your treatment with confidence.</p>
+              <Link href="/dentalfees" className="inline-flex w-fit transition-all duration-300 group items-center gap-2 text-base font-medium leading-[150%] text-blue-1200">View Fees
+                <img className="group-hover:translate-x-1 transition-all duration-300" src="images/chevron-right.svg" alt="" />
+              </Link>
             </motion.div>
             <motion.div
               className="border border-gray-1300 py-[54px] px-[34px]"
@@ -167,8 +175,9 @@ export default function Home() {
               <img src="images/sheild-icon.svg" alt="" />
               <h4 className="text-2xl font-semibold mt-5 leading-[130%] tracking-[-0.72px] text-grayscale-900">A Range of Treatments</h4>
               <p className="text-base font-normal leading-6 mt-5 mb-2 tracking-[-0.32px] text-grayscale-500">We offer a range of preventative and restorative treatments to put the smile back on your face when pain strikes, as well as providing cosmetic dentistry to give you the confidence you deserve.</p>
-              <Link href="/" className="inline-flex w-fit transition-all duration-300 group items-center gap-2 text-base font-medium leading-[150%] text-blue-1200">Read More 
-              <img className="group-hover:translate-x-1 transition-all duration-300" src="images/chevron-right.svg" alt="no" /></Link>
+              <Link href="/treatment" className="inline-flex w-fit transition-all duration-300 group items-center gap-2 text-base font-medium leading-[150%] text-blue-1200">Read More
+                <img className="group-hover:translate-x-1 transition-all duration-300" src="images/chevron-right.svg" alt="no" />
+              </Link>
             </motion.div>
           </div>
           <div className="absolute -left-20 top-0">
@@ -184,7 +193,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <Contact></Contact>
       <Footer></Footer>
     </>
   );

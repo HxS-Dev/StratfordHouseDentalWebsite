@@ -38,7 +38,6 @@ async function page() {
                     </div>
                </section>
                <Appoinment></Appoinment>
-               <Contact></Contact>
                <Footer></Footer>
           </>
      )

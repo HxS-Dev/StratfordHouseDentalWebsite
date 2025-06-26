@@ -31,7 +31,6 @@ async function page() {
                          </div>
                     </div>
                </section>
-               <Contact></Contact>
                <Footer></Footer>
           </div>
      )

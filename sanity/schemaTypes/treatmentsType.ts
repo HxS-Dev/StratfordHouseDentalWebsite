@@ -45,23 +45,58 @@ export const treatmentsType = defineType({
   
     defineField({
       name: 'body',
-      type: 'blockContent',
+      title: 'Body',
+      type: 'array',
+      of: [
+        { type: 'block' },
+        { type: 'image', options: { hotspot: true } },
+        { type: 'callout' },
+        { type: 'accordion' },
+      ],
     }),
     defineField({
       name: 'richText_row_1',
-      type: 'blockContent',
+      title: 'Rich Text Row 1',
+      type: 'array',
+      of: [
+        { type: 'block' },
+        { type: 'image', options: { hotspot: true } },
+        { type: 'callout' },
+        { type: 'accordion' },
+      ],
     }),
     defineField({
       name: 'richText_row_2',
-      type: 'blockContent',
+      title: 'Rich Text Row 2',
+      type: 'array',
+      of: [
+        { type: 'block' },
+        { type: 'image', options: { hotspot: true } },
+        { type: 'callout' },
+        { type: 'accordion' },
+      ],
     }),
     defineField({
       name: 'richText_row_3',
-      type: 'blockContent',
+      title: 'Rich Text Row 3',
+      type: 'array',
+      of: [
+        { type: 'block' },
+        { type: 'image', options: { hotspot: true } },
+        { type: 'callout' },
+        { type: 'accordion' },
+      ],
     }),
     defineField({
       name: 'richText_row_4',
-      type: 'blockContent',
+      title: 'Rich Text Row 4',
+      type: 'array',
+      of: [
+        { type: 'block' },
+        { type: 'image', options: { hotspot: true } },
+        { type: 'callout' },
+        { type: 'accordion' },
+      ],
     }),
     defineField({
       name: 'publishedAt',

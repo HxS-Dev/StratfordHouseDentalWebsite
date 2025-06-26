@@ -4,11 +4,13 @@ import Button from './Buttons';
 import { useState } from "react";
 import TreatmentsDropdown from './TreatmentsDropdown';
 import { motion } from "framer-motion";
+import { usePathname } from 'next/navigation';
 
 
 
 function Header() {
      const [menuOpen, setMenuOpen] = useState(false);
+     const pathname = usePathname();
      return (
           <motion.div
                className='bg-gray-1000 md:py-7 py-4'
@@ -23,32 +25,33 @@ function Header() {
                               } lg:flex  lg:static absolute top-20 left-0 lg:p-0 py-10 p-4 w-full z-[99] lg:bg-transparent bg-gray-1000 gap-8 justify-end transition-all duration-300`}>
                               <ul className="lg:flex items-center xl:gap-10 gap-5">
                                    <li>
-                                        <Link className='text-lg lg:pb-0 pb-4 font-medium leading-6 text-black block transition-all duration-300 hover:text-blue-1000' href="/">
+                                        <Link className={`text-lg lg:pb-0 pb-4 font-medium leading-6 block transition-all duration-300 rounded-md px-2 ${pathname === '/' ? 'bg-blue-1000 text-white shadow-md' : 'text-black hover:bg-blue-50 hover:text-blue-1000'}`} href="/">
                                         Home
                                         </Link>
                                    </li>
                                    <li>
-                                        <Link className='text-lg lg:pb-0 pb-4 font-medium leading-6 text-black block transition-all duration-300 hover:text-blue-1000' href="/about">
+                                        <Link className={`text-lg lg:pb-0 pb-4 font-medium leading-6 block transition-all duration-300 rounded-md px-2 ${pathname.startsWith('/about') ? 'bg-blue-1000 text-white shadow-md' : 'text-black hover:bg-blue-50 hover:text-blue-1000'}`} href="/about">
                                         About Us
                                         </Link>
                                    </li>
                                    <li>
-                                        <Link className='text-lg lg:pb-0 pb-4 font-medium leading-6 text-black block transition-all duration-300 hover:text-blue-1000' href="/dentalfees">
+                                        <Link className={`text-lg lg:pb-0 pb-4 font-medium leading-6 block transition-all duration-300 rounded-md px-2 ${pathname.startsWith('/dentalfees') ? 'bg-blue-1000 text-white shadow-md' : 'text-black hover:bg-blue-50 hover:text-blue-1000'}`} href="/dentalfees">
                                         Fees
                                         </Link>
                                    </li>
                                    <li>
-                                        <Link className='text-lg lg:pb-0 pb-4 font-medium leading-6 text-black block transition-all duration-300 hover:text-blue-1000' href="/news">
+                                        <Link className={`text-lg lg:pb-0 pb-4 font-medium leading-6 block transition-all duration-300 rounded-md px-2 ${pathname.startsWith('/news') ? 'bg-blue-1000 text-white shadow-md' : 'text-black hover:bg-blue-50 hover:text-blue-1000'}`} href="/news">
                                         News
                                         </Link>
                                    </li>
-                                   <li>
-                                        <Link className='text-lg lg:pb-0 pb-4 font-medium leading-6 text-black block transition-all duration-300 hover:text-blue-1000' href="/#contact-sec">
-                                        Contact
-                                        </Link>
-                                   </li>
+
                                    <li>
                                      <TreatmentsDropdown/>
+                                   </li>
+                                   <li>
+                                        <Link className={`text-lg lg:pb-0 pb-4 font-medium leading-6 block transition-all duration-300 rounded-md px-2 ${pathname.includes('/contact') ? 'bg-blue-1000 text-white shadow-md' : 'text-black hover:bg-blue-50 hover:text-blue-1000'}`} href="/contact">
+                                        Contact
+                                        </Link>
                                    </li>
                               </ul>
                               <Button>Book Appointment</Button>

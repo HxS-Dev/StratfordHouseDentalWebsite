@@ -7,6 +7,14 @@ import Footer from '@/app/components/Footer'
 import Header from '@/app/components/Header'
 import { PortableText } from '@portabletext/react'
 import { PortableTextComponents } from '@portabletext/react'
+import AccordionBlockDynamic from '@/components/AccordionBlockDynamic';
+import dynamic from 'next/dynamic';
+
+// Remove PageTransition import and usage
+// const PageTransition = dynamic(() => import('@/components/PageTransition'), { ssr: false });
+
+// Add a client-side wrapper for scroll animation
+// const ScrollReveal = dynamic(() => import('@/components/ui/ScrollReveal'));
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -33,17 +41,35 @@ export async function generateStaticParams() {
 const components: PortableTextComponents = {
   block: {
     h1: ({ children }) => (
-      <h1 className="text-4xl font-bold mb-4">{children}</h1>
+      <h1 className="text-4xl font-bold mb-4 text-blue-1300">{children}</h1>
     ),
     h2: ({ children }) => (
-      <h2 className="text-3xl font-bold mb-3">{children}</h2>
+      <h2 className="text-3xl font-bold mb-3 text-blue-1200">{children}</h2>
     ),
     h3: ({ children }) => (
-      <h3 className="text-2xl font-bold mb-2">{children}</h3>
+      <h3 className="text-2xl font-bold mb-2 text-blue-1100">{children}</h3>
+    ),
+    h4: ({ children }) => (
+      <h4 className="text-xl font-semibold mb-2 text-blue-1000">{children}</h4>
+    ),
+    h5: ({ children }) => (
+      <h5 className="text-lg font-semibold mb-2 text-blue-900">{children}</h5>
+    ),
+    h6: ({ children }) => (
+      <h6 className="text-base font-semibold mb-2 text-blue-800">{children}</h6>
     ),
     normal: ({ children }) => (
-      <p className="mb-4">{children}</p>
+      <p className="mb-4 text-gray-700">{children}</p>
     ),
+    ul: ({ children }) => <ul className="list-disc pl-6 mb-4">{children}</ul>,
+    ol: ({ children }) => <ol className="list-decimal pl-6 mb-4">{children}</ol>,
+    li: ({ children }) => <li className="mb-1">{children}</li>,
+    blockquote: ({ children }) => <blockquote className="border-l-4 border-blue-200 pl-4 italic text-blue-900 my-4">{children}</blockquote>,
+    code: ({ children }) => <pre className="bg-gray-100 rounded p-2 text-sm overflow-x-auto my-4"><code>{children}</code></pre>,
+    strong: ({ children }) => <strong className="font-bold text-blue-1300">{children}</strong>,
+    em: ({ children }) => <em className="italic text-blue-900">{children}</em>,
+    hr: () => <hr className="my-6 border-blue-200" />,
+    // Remove the custom 'a' block renderer, as links are handled in 'marks' below
   },
   types: {
     image: ({ value }) => (
@@ -55,6 +81,49 @@ const components: PortableTextComponents = {
         />
       </div>
     ),
+    callout: ({ value }) => {
+      let color = 'bg-blue-50 border-blue-300 text-blue-900';
+      let icon = (
+        <svg className="w-6 h-6 text-blue-400" fill="none" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" fill="none" />
+          <text x="12" y="16" textAnchor="middle" fontSize="12" fontWeight="bold" fill="currentColor" fontFamily="Arial, Helvetica, sans-serif">i</text>
+        </svg>
+      );
+      if (value.style === 'warning') {
+        color = 'bg-yellow-50 border-yellow-300 text-yellow-900';
+        icon = (
+          <svg className="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" fill="none" />
+            <path d="M12 8v4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            <circle cx="12" cy="16" r="1.2" fill="currentColor" />
+          </svg>
+        );
+      }
+      if (value.style === 'success') {
+        color = 'bg-green-50 border-green-300 text-green-900';
+        icon = (
+          <svg className="w-6 h-6 text-green-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" fill="none" />
+            <path d="M12 8v4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            <circle cx="12" cy="16" r="1.2" fill="currentColor" />
+          </svg>
+        );
+      }
+      return (
+        <div className={`my-6 p-5 border-l-4 rounded-xl flex items-start shadow-sm ${color}`}> 
+          <div className="flex flex-col w-full">
+            <div className="flex items-center gap-2 mb-1">
+              <span className="flex-shrink-0">{icon}</span>
+              {value.title && <div className="font-bold text-base leading-tight">{value.title}</div>}
+            </div>
+            <div className="prose max-w-none text-inherit mt-2">
+              <PortableText value={value.body} components={components} />
+            </div>
+          </div>
+        </div>
+      );
+    },
+    accordion: ({ value }) => <AccordionBlockDynamic value={value} />, // Use the client wrapper, no components prop
   },
   marks: {
     link: ({ children, value }) => {
@@ -66,6 +135,14 @@ const components: PortableTextComponents = {
         </a>
       )
     },
+  },
+  list: {
+    bullet: ({ children }) => <ul className="list-disc pl-6 mb-4">{children}</ul>,
+    number: ({ children }) => <ol className="list-decimal pl-6 mb-4">{children}</ol>,
+  },
+  listItem: {
+    bullet: ({ children }) => <li className="mb-1">{children}</li>,
+    number: ({ children }) => <li className="mb-1">{children}</li>,
   },
 }
 
@@ -80,21 +157,20 @@ function RenderSection({ value, index = 0 }: { value: any[], index?: number }) {
   const textBlocks = value.filter((block: any) => block._type !== 'image');
 
   if (imageBlock) {
-    // Alternate float direction based on index
-    const floatDirection: 'left' | 'right' = index % 2 === 0 ? 'left' : 'right';
-    // Responsive margin and float classes
-    const floatClass = floatDirection === 'left' ? 'md:float-left' : 'md:float-right';
-    const marginClass = floatDirection === 'left' ? 'md:mr-8' : 'md:ml-8';
+    // Alternate image order for left/right alignment
+    const isImageLeft = index % 2 === 0;
     return (
       <div className="w-full max-w-[1200px] mx-auto my-12">
-        <div className="w-full">
-          <img
-            src={urlFor(imageBlock).url()}
-            alt={imageBlock.alt || ''}
-            className={`w-full max-w-[350px] max-h-[350px] object-contain rounded-xl shadow mb-4 ${floatClass} ${marginClass}`}
-            style={{ shapeOutside: 'margin-box', float: undefined }} // Remove float for mobile, handled by Tailwind for md+
-          />
-          <div className="prose max-w-none !leading-relaxed overflow-hidden">
+        <div className={`flex flex-col md:flex-row ${!isImageLeft ? 'md:flex-row-reverse' : ''} items-start gap-8`}>
+          <div className="w-full md:basis-2/5 flex-shrink-0 flex-grow-0 flex justify-center items-start">
+            <img
+              src={urlFor(imageBlock).url()}
+              alt={imageBlock.alt || ''}
+              className="w-full max-w-full md:max-h-[600px] max-h-[350px] object-contain rounded-xl !shadow-none self-start md:self-stretch"
+              style={{ background: 'transparent', border: 'none', boxShadow: 'none', display: 'block', objectFit: 'contain' }}
+            />
+          </div>
+          <div className="prose max-w-none !leading-relaxed overflow-hidden w-full md:basis-3/5 flex-1">
             <PortableText value={textBlocks} components={components} />
           </div>
         </div>
@@ -110,7 +186,7 @@ function RenderSection({ value, index = 0 }: { value: any[], index?: number }) {
 }
 
 export default async function ArticlePage({ params }: PageProps) {
-  const resolvedParams = await params; // Resolve the Promise
+  const resolvedParams = await params;
   const treatments = await sanityClient.fetch(treatmentsBySlugQuery, { slug: resolvedParams.slug })
 
   const titleParts = [
@@ -118,7 +194,7 @@ export default async function ArticlePage({ params }: PageProps) {
   ]
 
   return (
-    <div>
+    <>
       <Header />
       <section className="bg-blue-1100 max-h-[287px] md:min-h-[287px] min-h-[165px] flex items-center relative">
         <div className="xl:max-w-[1270px] w-full max-w-[952px] relative md:px-5 px-4 mx-auto">
@@ -165,6 +241,6 @@ export default async function ArticlePage({ params }: PageProps) {
       </section>
       <Contact />
       <Footer />
-    </div>
+    </>
   )
 }

@@ -7,6 +7,7 @@ import Footer from '@/app/components/Footer'
 import Header from '@/app/components/Header'
 import { PortableText } from '@portabletext/react'
 import { PortableTextComponents } from '@portabletext/react'
+import AccordionBlockDynamic from '@/components/AccordionBlockDynamic';
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -54,6 +55,7 @@ const components: PortableTextComponents = {
         />
       </div>
     ),
+    accordion: ({ value }) => <AccordionBlockDynamic value={value} />, // Only pass value, not components
   },
   marks: {
     link: ({ children, value }) => {
