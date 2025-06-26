@@ -54,7 +54,14 @@ function Header() {
                                         </Link>
                                    </li>
                               </ul>
-                              <Button>Book Appointment</Button>
+                              <a
+                                   href="https://booking.uk.hsone.app/soe/new/%20?pid=UKELU03"
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   className="text-white md:text-base text-sm transtion ease-in-out duration-500 hover:text-blue-1000 hover:bg-transparent border border-blue-1000 font-medium leading-6 p-4 py-3 bg-blue-1000 inline-block"
+                                   >
+                                   Book Appointment
+                              </a>
                          </div>
                          <button type='button' onClick={() => setMenuOpen(!menuOpen)} className='bg-transparent border-0 p-0 lg:hidden'><img src="images/hamburger.svg" alt=''></img></button>
                     </div>
