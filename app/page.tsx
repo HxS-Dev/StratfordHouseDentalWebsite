@@ -160,7 +160,7 @@ export default function Home() {
               <img src="images/wallet-icon.svg" alt="" />
               <h4 className="text-2xl font-semibold mt-5 leading-[130%] tracking-[-0.72px] text-grayscale-900">Dental Fees</h4>
               <p className="text-base font-normal leading-6  mt-5 mb-2 tracking-[-0.32px] text-grayscale-500">Explore our transparent dental fees and payment options to plan your treatment with confidence.</p>
-              <Link href="/dentalfees" className="inline-flex w-fit transition-all duration-300 group items-center gap-2 text-base font-medium leading-[150%] text-blue-1200">View Fees
+              <Link href="/fees" className="inline-flex w-fit transition-all duration-300 group items-center gap-2 text-base font-medium leading-[150%] text-blue-1200">View Fees
                 <img className="group-hover:translate-x-1 transition-all duration-300" src="images/chevron-right.svg" alt="" />
               </Link>
             </motion.div>

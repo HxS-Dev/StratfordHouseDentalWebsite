@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Button from './Buttons';
 import { useState } from "react";
 import TreatmentsDropdown from './TreatmentsDropdown';
+import FeesDropdown from './FeesDropdown';
 import { motion } from "framer-motion";
 import { usePathname } from 'next/navigation';
 
@@ -35,9 +36,7 @@ function Header() {
                                         </Link>
                                    </li>
                                    <li>
-                                        <Link className={`text-lg lg:pb-0 pb-4 font-medium leading-6 block transition-all duration-300 rounded-md px-2 ${pathname.startsWith('/dentalfees') ? 'bg-blue-1000 text-white shadow-md' : 'text-black hover:bg-blue-50 hover:text-blue-1000'}`} href="/dentalfees">
-                                        Fees
-                                        </Link>
+                                        <FeesDropdown/>
                                    </li>
                                    <li>
                                         <Link className={`text-lg lg:pb-0 pb-4 font-medium leading-6 block transition-all duration-300 rounded-md px-2 ${pathname.startsWith('/news') ? 'bg-blue-1000 text-white shadow-md' : 'text-black hover:bg-blue-50 hover:text-blue-1000'}`} href="/news">

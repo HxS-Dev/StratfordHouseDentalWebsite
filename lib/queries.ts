@@ -81,3 +81,23 @@ export const treatmentsBySlugQuery = `*[_type == "treatments" && slug.current ==
   richText_row_4,
   publishedAt
 }`;
+
+export const allFeesQuery =`*[_type == "fees"] | order(publishedAt desc){
+  _id,
+  title,
+  slug,
+  mainImage,
+  publishedAt,
+  body,
+  feesTable,
+}`;
+
+export const feesBySlugQuery = `*[_type == "fees" && slug.current == $slug][0] {
+  _id,
+  title,
+  slug,
+  mainImage,
+  publishedAt,
+  body,
+  feesTable,
+}`;
