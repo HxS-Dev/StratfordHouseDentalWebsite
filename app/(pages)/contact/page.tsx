@@ -55,11 +55,11 @@ export default function ContactPage() {
                   <h2 className="text-2xl font-semibold text-blue-1200">Opening Hours</h2>
                 </div>
                 <div className="divide-y divide-gray-200 text-base text-gray-900">
-                  <div className="flex items-center justify-between py-2"><span className="font-medium">Monday</span><span>09.00-17.30</span></div>
-                  <div className="flex items-center justify-between py-2"><span className="font-medium">Tuesday</span><span>09.00-17.30</span></div>
-                  <div className="flex items-center justify-between py-2"><span className="font-medium">Wednesday</span><span>09.00-17.30</span></div>
-                  <div className="flex items-center justify-between py-2"><span className="font-medium">Thursday</span><span>09.00-17.30</span></div>
-                  <div className="flex items-center justify-between py-2"><span className="font-medium">Friday</span><span>09.00-17.15</span></div>
+                  <div className="flex items-center justify-between py-2"><span className="font-medium">Monday</span><span>09:00-17:30</span></div>
+                  <div className="flex items-center justify-between py-2"><span className="font-medium">Tuesday</span><span>09:00-17:30</span></div>
+                  <div className="flex items-center justify-between py-2"><span className="font-medium">Wednesday</span><span>09:00-17:30</span></div>
+                  <div className="flex items-center justify-between py-2"><span className="font-medium">Thursday</span><span>09:00-17:30</span></div>
+                  <div className="flex items-center justify-between py-2"><span className="font-medium">Friday</span><span>09:00-17:15</span></div>
                 </div>
               </div>
               <div className="flex items-center gap-2 mt-6 justify-end">
