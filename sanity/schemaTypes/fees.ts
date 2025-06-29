@@ -37,9 +37,26 @@ export const Fees = defineType({
       type: 'blockContent',
     }),
     defineField({
-        name: 'feesTable',
-        title: 'Fees Table',
-        type: 'table',
+      name: 'feesTables',
+      title: 'Fees Tables',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'title',
+              type: 'string',
+              title: 'Table Title',
+            }),
+            defineField({
+              name: 'table',
+              type: 'table',
+              title: 'Table',
+            }),
+          ],
+        }),
+      ],
     }),
   ],
   preview: {

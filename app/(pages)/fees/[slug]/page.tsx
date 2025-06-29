@@ -231,38 +231,42 @@ export default async function ArticlePage({ params }: PageProps) {
           {/* Main body with alternating image float */}
           {fees?.body && <RenderSection value={fees.body} index={0} />}
           {/* Render feesTable */}
-          {feesTableRows.length > 0 && (
-            <div className="mt-8">
-              <table className="w-full border-collapse border border-gray-300">
-                <thead>
-                  <tr>
-                    {feesTableRows[0]?.cells.map((header: string, index: number) => (
-                      <th 
-                        key={index} 
-                        className={`border border-gray-300 px-4 py-2 bg-gray-100 ${index === 0 && !feesTableRows[0]?.cells[0] ? 'text-left font-bold' : ''}`}
-                        style={index === 0 ? { width: 'max-content' } : { width: `${100 / (feesTableRows[0]?.cells.length - 1)}%` }}
-                      >
-                        {header || ' '}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {feesTableRows.slice(1).map((row: { cells: string[] }, rowIndex: number) => (
-                    <tr key={rowIndex}>
-                      {row.cells.map((cell: string, cellIndex: number) => (
-                        <td 
-                          key={cellIndex} 
-                          className={`border border-gray-300 px-4 py-2 ${cellIndex === 0 && !feesTableRows[0]?.cells[0] ? 'text-left font-bold bg-gray-100' : ''}`}
-                          style={cellIndex === 0 ? { width: 'max-content' } : { width: `${100 / (feesTableRows[0]?.cells.length - 1)}%` }}
-                        >
-                          {cell || ' '}
-                        </td>
+          {fees?.feesTables?.length > 0 && (
+            <div className={`mt-8 ${fees?.feesTables?.length > 1 ? 'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6' : 'w-full'}`}>
+              {fees?.feesTables?.map((feesTable, index) => (
+                <div key={index} className="border border-gray-300 rounded-lg shadow-md p-4 bg-white">
+                  <table className="w-full border-collapse border border-gray-300">
+                    <thead>
+                      <tr>
+                        {feesTable.table?.rows[0]?.cells.map((header: string, index: number) => (
+                          <th 
+                            key={index} 
+                            className={`border border-gray-300 px-4 py-2 bg-gray-100 ${index === 0 && !feesTable.table?.rows[0]?.cells[0] ? 'text-left font-bold' : ''}`}
+                            style={index === 0 ? { width: 'max-content' } : { width: `${100 / (feesTable.table?.rows[0]?.cells.length - 1)}%` }}
+                          >
+                            {header || ' '}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {feesTable.table?.rows.slice(1).map((row: { cells: string[] }, rowIndex: number) => (
+                        <tr key={rowIndex}>
+                          {row.cells.map((cell: string, cellIndex: number) => (
+                            <td 
+                              key={cellIndex} 
+                              className={`border border-gray-300 px-4 py-2 ${cellIndex === 0 && !feesTable.table?.rows[0]?.cells[0] ? 'text-left font-bold bg-gray-100' : ''}`}
+                              style={cellIndex === 0 ? { width: 'max-content' } : { width: `${100 / (feesTable.table?.rows[0]?.cells.length - 1)}%` }}
+                            >
+                              {cell || ' '}
+                            </td>
+                          ))}
+                        </tr>
                       ))}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+                    </tbody>
+                  </table>
+                </div>
+              ))}
             </div>
           )}
         </div>

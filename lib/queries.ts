@@ -99,5 +99,8 @@ export const feesBySlugQuery = `*[_type == "fees" && slug.current == $slug][0] {
   mainImage,
   publishedAt,
   body,
-  feesTable,
+  feesTables[] {
+    title,
+    table
+  },
 }`;
