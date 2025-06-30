@@ -233,7 +233,7 @@ export default async function ArticlePage({ params }: PageProps) {
           {/* Render feesTable */}
           {fees?.feesTables?.length > 0 && (
             <div className={`mt-8 ${fees?.feesTables?.length > 1 ? 'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6' : 'w-full'}`}>
-              {fees?.feesTables?.map((feesTable, index) => (
+              {fees?.feesTables?.map((feesTable: { title: string; table: { rows: { cells: string[] }[] } }, index: number) => (
                 <div key={index} className="border border-gray-300 rounded-lg shadow-md p-4 bg-white">
                   <table className="w-full border-collapse border border-gray-300">
                     <thead>
