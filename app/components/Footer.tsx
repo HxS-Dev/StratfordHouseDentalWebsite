@@ -1,12 +1,32 @@
-import React from 'react'
-import Link from 'next/link'
+"use client";
+
+import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { sanityClient } from '@/lib/sanity';
+import { allTreatmentsQuery } from '@/lib/queries';
+
 function Footer() {
+     const [topTreatments, setTopTreatments] = useState<any[]>([]);
+
+     useEffect(() => {
+          const fetchTreatments = async () => {
+               try {
+                    const data = await sanityClient.fetch(allTreatmentsQuery);
+                    setTopTreatments(data.slice(0, 4)); // Fetch top 4 treatments
+               } catch (error) {
+                    console.error('Error fetching treatments:', error);
+               }
+          };
+
+          fetchTreatments();
+     }, []);
+
      return (
           <footer className='bg-blue-1200 md:pt-20 md:pb-14 py-12'>
-               <div className="xl:max-w-[1270px] max-w-[952px]  relative md:px-5 px-4 mx-auto">
+               <div className="xl:max-w-[1270px] max-w-[952px] relative md:px-5 px-4 mx-auto">
                     <div className='flex mb-14 items-center justify-between'>
                          <Link href={"/#hero-sec"}>
-                         <img src="/images/footer-logo.svg" alt="" />
+                              <img src="/images/footer-logo.svg" alt="" />
                          </Link>
                          <ul className='flex items-center gap-2'>
                               <li>
@@ -31,41 +51,33 @@ function Footer() {
                                         <Link href="/about" className='text-lg font-normal w-fit hover:underline leading-[150%] tracking-[-0.36px] mb-4 text-gray-1000 block'>About Us </Link>
                                    </li>
                                    <li>
-                                        <Link href="/" className='text-lg font-normal w-fit hover:underline leading-[150%] tracking-[-0.36px] mb-4 text-gray-1000 block'>Services </Link>
+                                        <Link href="/treatment" className='text-lg font-normal w-fit hover:underline leading-[150%] tracking-[-0.36px] mb-4 text-gray-1000 block'>Treatments </Link>
                                    </li>
                                    <li>
-                                        <Link href="/#contact-sec" className='text-lg font-normal w-fit hover:underline leading-[150%] tracking-[-0.36px] text-gray-1000 block'>Contact Us </Link>
+                                        <Link href="/contact" className='text-lg font-normal w-fit hover:underline leading-[150%] tracking-[-0.36px] text-gray-1000 block'>Contact </Link>
                                    </li>
                               </ul>
                          </div>
                          <div className='md:w-3/12 w-1/2'>
-                              <h4 className='text-lg font-semibold mb-4 leading-[150%] text-white'>Services</h4>
+                              <h4 className='text-lg font-semibold mb-4 leading-[150%] text-white'>Treatments</h4>
                               <ul>
-                                   <li>
-                                        <Link href="/" className='text-lg font-normal w-fit hover:underline leading-[150%] tracking-[-0.36px] mb-4 text-gray-1000 block'>Preventive Treatemtn </Link>
-                                   </li>
-                                   <li>
-                                        <Link href="/" className='text-lg font-normal w-fit hover:underline leading-[150%] tracking-[-0.36px] mb-4 text-gray-1000 block'>Cavity Treatment</Link>
-                                   </li>
-                                   <li>
-                                        <Link href="/" className='text-lg font-normal w-fit hover:underline leading-[150%] tracking-[-0.36px] mb-4 text-gray-1000 block'>Hygeine Services  </Link>
-                                   </li>
-                                   <li>
-                                        <Link href="/" className='text-lg font-normal w-fit hover:underline leading-[150%] tracking-[-0.36px]  text-gray-1000 block'>Teeth Implants </Link>
-                                   </li>
+                                   {topTreatments.map((treatment) => (
+                                        <li key={treatment._id}>
+                                             <Link href={`/treatment/${treatment.slug.current}`} className='text-lg font-normal w-fit hover:underline leading-[150%] tracking-[-0.36px] mb-4 text-gray-1000 block'>
+                                                  {treatment.title}
+                                             </Link>
+                                        </li>
+                                   ))}
                               </ul>
                          </div>
                          <div className='md:w-3/12 w-1/2'>
                               <h4 className='text-lg font-semibold mb-4 leading-[150%] text-white'>Resources</h4>
                               <ul>
                                    <li>
-                                        <Link href="/" className='text-lg font-normal w-fit hover:underline leading-[150%] tracking-[-0.36px] mb-4 text-gray-1000 block'>Customer Service </Link>
+                                        <Link href="/fees" className='text-lg font-normal w-fit hover:underline leading-[150%] tracking-[-0.36px] mb-4 text-gray-1000 block'>Fees </Link>
                                    </li>
                                    <li>
-                                        <Link href="/" className='text-lg font-normal w-fit hover:underline leading-[150%] tracking-[-0.36px] mb-4 text-gray-1000 block'>Help Center</Link>
-                                   </li>
-                                   <li>
-                                        <Link href="/" className='text-lg font-normal w-fit hover:underline leading-[150%] tracking-[-0.36px]  text-gray-1000 block'>News </Link>
+                                        <Link href="/news" className='text-lg font-normal w-fit hover:underline leading-[150%] tracking-[-0.36px]  text-gray-1000 block'>News </Link>
                                    </li>
                               </ul>
                          </div>
@@ -75,7 +87,7 @@ function Footer() {
                     </div>
                </div>
           </footer>
-     )
+     );
 }
 
-export default Footer
+export default Footer;

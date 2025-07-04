@@ -4,6 +4,7 @@ import Footer from '@/app/components/Footer'
 import Header from '@/app/components/Header'
 import HeroSec from '@/app/components/HeroSec'
 import React from 'react'
+import Appointment from '@/app/components/Appoinment';
 type TitlePart = {
      tag: "h1" | "h6";
      text: string;
@@ -74,16 +75,7 @@ function page() {
                                    </div>
                               </div>
                          </div>
-                         <div className="lg:w-1/3 w-full">
-                              <div className="lg:px-0 relative z-10 md:px-10 px-4">
-                                   <h2 className="2xl:text-[36px] text-center text-2xl font-semibold 2xl:leading-[44px] leading-[130%] md:tracking-[-0.72px] tracking-[-0.48px] text-blue-1300">Begin Your Journey to Better Dental Health Today</h2>
-                                   <p className="2xl:text-xl text-center text-base md:mt-5 mt-4 md:mb-12 mb-6 font-normal 2xl:leading-[30px] leading-6 text-tertiary-600">Take the first step towards a healthier smile and improved confidence. Our expert team is ready to provide you with exceptional dental care.</p>
-                                   <form action="" className="flex items-center gap-4">
-                                        <input type="email" className="text-base flex-1 leading-6 font-normal text-gray-1500 placeholder:text-gray-1500 px-[14px] border border-gray-1200 bg-white w-full h-12 shadow-3xl" placeholder="Enter your email"></input>
-                                        <Button>Contact Us</Button>
-                                   </form>
-                              </div>
-                         </div>
+                         <Appoinment />
                          <div className='lg:w-1/3 w-full'>
                               <div className='lg:text-end z-10 w-fit md:ml-auto text-center relative'>
                                    <img src="images/right-img.png" className='inline-block' alt="" />
