@@ -30,13 +30,10 @@ function Footer() {
                          </Link>
                          <ul className='flex items-center gap-2'>
                               <li>
-                                   <Link href="/" className='w-10 h-10 transition-all duration-300 hover:opacity-80 flex items-center justify-center bg-white'><img src="/images/linkdin.svg" alt="" /></Link>
+                                   <Link href="https://uk.linkedin.com/company/stratford-house-dental-practice" className='w-10 h-10 transition-all duration-300 hover:opacity-80 flex items-center justify-center bg-white'><img src="/images/linkdin.svg" alt="" /></Link>
                               </li>
                               <li>
-                                   <Link href="/" className='w-10 h-10 transition-all duration-300 hover:opacity-80 flex items-center justify-center bg-white'><img src="/images/fb-icon.svg" alt="" /></Link>
-                              </li>
-                              <li>
-                                   <Link href="/" className='w-10 h-10 transition-all duration-300 hover:opacity-80 flex items-center justify-center bg-white'><img src="/images/insta-icon.svg" alt="" /></Link>
+                                   <Link href="https://www.facebook.com/p/Stratford-House-Dental-Practice-100063300785517/" className='w-10 h-10 transition-all duration-300 hover:opacity-80 flex items-center justify-center bg-white'><img src="/images/fb-icon.svg" alt="" /></Link>
                               </li>
                          </ul>
                     </div>
