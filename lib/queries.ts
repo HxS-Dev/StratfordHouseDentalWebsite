@@ -104,3 +104,10 @@ export const feesBySlugQuery = `*[_type == "fees" && slug.current == $slug][0] {
     table
   },
 }`;
+
+export const bookingLinkQuery = `*[_type == "bookingLink"][0] {
+  _id,
+  slug,
+  publishedAt,
+  bookingLink
+}`;

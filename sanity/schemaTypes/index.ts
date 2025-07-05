@@ -10,8 +10,8 @@ import {authorType} from './authorType'
 import {Fees} from './fees'
 import calloutType from './calloutType'
 import {accordionType} from './accordionType'
-
+import { bookingLink } from './bookingLink'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [blockContentType, categoryType, postType, authorType, Team, treatmentsType, treatmentsCategoryType, calloutType, accordionType, Fees],
+  types: [blockContentType, categoryType, postType, authorType, Team, treatmentsType, treatmentsCategoryType, calloutType, accordionType, Fees, bookingLink],
 }
