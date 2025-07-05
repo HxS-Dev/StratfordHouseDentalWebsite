@@ -6,8 +6,21 @@ import Header from "./components/Header";
 import Testimonails from "./components/Testimonails";
 import Treatment from "./components/Treatment";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { bookingLinkQuery } from "@/lib/queries";
+import { sanityClient } from "@/lib/sanity";
 
 export default function Home() {
+  const [bookingLink, setBookingLink] = useState("");
+
+  useEffect(() => {
+    const fetchLink = async () => {
+      const data = await sanityClient.fetch(bookingLinkQuery);
+      setBookingLink(data?.bookingLink || "");
+    };
+    fetchLink();
+  }, []);
+
   return (
     <>
       <Header />
@@ -29,7 +42,7 @@ export default function Home() {
               <p className="xl:text-lg text-base text-black lg:mx-0 mx-auto max-w-[500px] leading-[150%] tracking-[-0.36px] md:mt-4 mt-2 mb-8">Expert dental care in a comfortable environment, using the latest technology to give you the healthy, beautiful smile you deserve.</p>
               <motion.div whileTap={{ scale: 0.95 }}>
                 <a
-                  href="https://booking.uk.hsone.app/soe/new/%20?pid=UKELU03"
+                  href={bookingLink}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-white md:text-base text-sm transtion ease-in-out duration-500 hover:text-blue-1000 hover:bg-transparent border border-blue-1000 font-medium leading-6 p-4 py-3 bg-blue-1000 inline-block"
