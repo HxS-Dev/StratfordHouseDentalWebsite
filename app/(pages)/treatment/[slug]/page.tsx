@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import { sanityClient } from '@/lib/sanity'
 import { treatmentsBySlugQuery } from '@/lib/queries'
 import { urlFor } from '@/lib/imageBuilder'
-import Contact from '@/app/components/Contact'
+import Appointment from '@/app/components/Appoinment';
 import Footer from '@/app/components/Footer'
 import Header from '@/app/components/Header'
 import { PortableText } from '@portabletext/react'
@@ -239,7 +239,7 @@ export default async function ArticlePage({ params }: PageProps) {
           {treatments?.richText_row_4 && <RenderSection value={treatments.richText_row_4} index={4} />}
         </div>
       </section>
-      <Contact />
+      <Appointment />
       <Footer />
     </>
   )

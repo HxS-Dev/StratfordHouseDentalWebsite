@@ -1,6 +1,5 @@
 "use client";
 import Appoinment from '@/app/components/Appoinment';
-import Contact from '@/app/components/Contact';
 import Footer from '@/app/components/Footer';
 import Header from '@/app/components/Header';
 import HeroSec from '@/app/components/HeroSec';

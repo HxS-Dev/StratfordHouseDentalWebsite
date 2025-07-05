@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import { sanityClient } from '@/lib/sanity'
 import { feesBySlugQuery } from '@/lib/queries'
 import { urlFor } from '@/lib/imageBuilder'
-import Contact from '@/app/components/Contact'
+import Appointment from '@/app/components/Appoinment';
 import Footer from '@/app/components/Footer'
 import Header from '@/app/components/Header'
 import { PortableText } from '@portabletext/react'
@@ -233,45 +233,43 @@ export default async function ArticlePage({ params }: PageProps) {
           {/* Render feesTable */}
           {fees?.feesTables?.length > 0 && (
             <div className={`mt-8 ${fees?.feesTables?.length > 1 ? 'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6' : 'w-full'}`}>
-              {fees?.feesTables?.map((feesTable: { title: string; table: { rows: { cells: string[] }[] } }, index: number) => (
-                <div key={index} className="border border-gray-300 rounded-lg shadow-md p-4 bg-white">
-                  <table className="w-full border-collapse border border-gray-300">
-                    <thead>
-                      <tr>
-                        {feesTable.table?.rows[0]?.cells.map((header: string, index: number) => (
-                          <th 
-                            key={index} 
-                            className={`border border-gray-300 px-4 py-2 bg-gray-100 ${index === 0 && !feesTable.table?.rows[0]?.cells[0] ? 'text-left font-bold' : ''}`}
-                            style={index === 0 ? { width: 'max-content' } : { width: `${100 / (feesTable.table?.rows[0]?.cells.length - 1)}%` }}
-                          >
-                            {header || ' '}
-                          </th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {feesTable.table?.rows.slice(1).map((row: { cells: string[] }, rowIndex: number) => (
-                        <tr key={rowIndex}>
-                          {row.cells.map((cell: string, cellIndex: number) => (
-                            <td 
-                              key={cellIndex} 
-                              className={`border border-gray-300 px-4 py-2 ${cellIndex === 0 && !feesTable.table?.rows[0]?.cells[0] ? 'text-left font-bold bg-gray-100' : ''}`}
-                              style={cellIndex === 0 ? { width: 'max-content' } : { width: `${100 / (feesTable.table?.rows[0]?.cells.length - 1)}%` }}
-                            >
-                              {cell || ' '}
-                            </td>
-                          ))}
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              ))}
+                {fees?.feesTables?.map((feesTable: { title: string; table: { rows: { cells: string[] }[] } }, index: number) => (
+                    <div key={index} className="border border-gray-300 rounded-lg shadow-md p-4 bg-white">
+                        <table className="w-full border-collapse border border-gray-1200">
+                            <thead>
+                                <tr className="text-xl font-semibold text-blue-1200">
+                                    {feesTable.table?.rows[0]?.cells.map((header: string, index: number) => (
+                                        <th 
+                                            key={index} 
+                                            className={`border border-gray-1200 px-4 py-2 bg-gray-1400`}
+                                        >
+                                            {header || ' '}
+                                        </th>
+                                    ))}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {feesTable.table?.rows.slice(1).map((row: { cells: string[] }, rowIndex: number) => (
+                                    <tr key={rowIndex} className={rowIndex % 2 === 0 ? 'bg-gray-1400' : ''}>
+                                        {row.cells.map((cell: string, cellIndex: number) => (
+                                            <td 
+                                                key={cellIndex} 
+                                                className={`border border-gray-1200 px-4 py-2 text-sm font-medium text-blue-1300`}
+                                            >
+                                                {cell || ' '}
+                                            </td>
+                                        ))}
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                ))}
             </div>
           )}
         </div>
       </section>
-      <Contact />
+      <Appointment />
       <Footer />
     </>
   )
