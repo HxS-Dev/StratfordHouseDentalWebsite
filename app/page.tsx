@@ -25,7 +25,7 @@ export default function Home() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <h1 className="xl:text-5xl md:text-4xl text-[32px] text-black lg:mx-0 mx-auto font-semibold leading-[120%] font-inter-display">Transform Your Smile, Transform Your Life</h1>
+              <h1 className="xl:text-5xl md:text-4xl text-[32px] text-black lg:mx-0 mx-auto font-semibold leading-[120%] font-inter-display">Welcome to Stratford House Dental Practice</h1>
               <p className="xl:text-lg text-base text-black lg:mx-0 mx-auto max-w-[500px] leading-[150%] tracking-[-0.36px] md:mt-4 mt-2 mb-8">Expert dental care in a comfortable environment, using the latest technology to give you the healthy, beautiful smile you deserve.</p>
               <motion.div whileTap={{ scale: 0.95 }}>
                 <a

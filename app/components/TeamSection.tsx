@@ -43,7 +43,9 @@ export default function TeamSection({ team }: TeamSectionProps) {
             </div>
             <h4 className='text-xl font-semibold mt-6 mb-0.5 leading-[30px] text-blue-1300'>{member.title}</h4>
             <h6 className='text-lg leading-7 font-normal mb-4 text-blue-1000'>{member.position}</h6>
-            <span className='text-base font-normal leading-6 text-tertiary-600'>GDC No: {member.gdn_no}</span>
+            {member.gdn_no && (
+              <span className='text-base font-normal leading-6 text-tertiary-600'>GDC No: {member.gdn_no}</span>
+            )}
           </div>
         ))}
       </div>
@@ -54,4 +56,4 @@ export default function TeamSection({ team }: TeamSectionProps) {
       />
     </>
   )
-} 
+}
