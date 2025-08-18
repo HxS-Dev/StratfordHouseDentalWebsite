@@ -111,3 +111,16 @@ export const bookingLinkQuery = `*[_type == "bookingLink"][0] {
   publishedAt,
   bookingLink
 }`;
+
+export const allTestimonialsQuery = `*[_type == "testimonials" && isActive == true] | order(order asc){
+  _id,
+  quote,
+  name,
+  role,
+  stars,
+  avatar,
+  mainImage,
+  mainImageMobile,
+  order,
+  publishedAt
+}`;

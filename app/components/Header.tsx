@@ -32,7 +32,7 @@ function Header() {
           >
                <div className='xl:max-w-[1270px] max-w-[952px]  md:px-5 px-4 mx-auto'>
                     <div className='flex items-center justify-between'>
-                         <Link href="/" className='hover:opacity-70 transition-all duration-300'><img className='w-32 object-contain' src="/images/logo.svg" alt="no-img" /></Link>
+                         <Link href="/" className='hover:opacity-70 transition-all duration-300'><img className='w-52 md:w-64 h-auto object-contain' src="/images/stratford-logo.jpeg" alt="Stratford House Dental Practice Logo" /></Link>
                          <div className={`${menuOpen ? "block" : "hidden"
                               } lg:flex  lg:static absolute top-20 left-0 lg:p-0 py-10 p-4 w-full z-[99] lg:bg-transparent bg-gray-1000 gap-8 justify-end transition-all duration-300`}>
                               <ul className="lg:flex items-center xl:gap-10 gap-5">

@@ -38,11 +38,11 @@ html{
   --shadow-3xl: 0px 1px 2px 0px rgba(10, 13, 18, 0.05);
   --shadow-4xl: 0px 1px 3px 0px rgba(13, 13, 18, 0.05), 0px 1px 2px 0px rgba(13, 13, 18, 0.04);
   --color-gray-1000: #E8F5FC;
-  --color-primary: #0e547b;
-  --color-blue-1000: #126C9F;
-  --color-blue-1100: #0B405E;
-  --color-blue-1200: #0E547B;
-  --color-blue-1300: #181D27;
+  --color-primary: #0072CE;
+  --color-blue-1000: #00A3C4;
+  --color-blue-1100: #41B6E6;
+  --color-blue-1200: #41B6E6;
+  --color-blue-1300: #0072CE;
   --color-blue-1400: #48ADE6;
   --color-blue-1500: #96D0F1;
   --color-grayscale-900: #0D0D12;
@@ -77,7 +77,7 @@ html{
 .swiper-pagination {
   text-align: start !important;
   left: 62px !important;
-  bottom: 145px !important;
+  bottom: 80px !important;
 }
 
 @media screen and (max-width: 991px) {

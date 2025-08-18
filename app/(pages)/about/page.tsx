@@ -75,10 +75,10 @@ export default function About() {
       </motion.section>
       <motion.section
         className='md:py-12 pt-0'
-        initial={{ opacity: 0, y: 40 }}
+        initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.5 }}
-        transition={{ duration: 0.7, delay: 0.2 }}
+        viewport={{ once: true, amount: 0.1 }}
+        transition={{ duration: 0.5, delay: 0.1 }}
       >
         <div className="xl:max-w-[1270px] w-full max-w-[952px] relative md:px-5 px-4 mx-auto">
           <div className="md:text-center md:mb-16 mb-6">
