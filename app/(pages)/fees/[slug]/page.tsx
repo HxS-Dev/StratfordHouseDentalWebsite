@@ -232,39 +232,129 @@ export default async function ArticlePage({ params }: PageProps) {
           {fees?.body && <RenderSection value={fees.body} index={0} />}
           {/* Render feesTable */}
           {fees?.feesTables?.length > 0 && (
-            <div className={`mt-8 ${fees?.feesTables?.length > 1 ? 'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6' : 'w-full'}`}>
-                {fees?.feesTables?.map((feesTable: { title: string; table: { rows: { cells: string[] }[] } }, index: number) => (
-                    <div key={index} className="border border-gray-300 rounded-lg shadow-md p-4 bg-white">
-                        <table className="w-full border-collapse border border-gray-1200">
-                            <thead>
-                                <tr className="text-xl font-semibold text-blue-1200">
-                                    {feesTable.table?.rows[0]?.cells.map((header: string, index: number) => (
-                                        <th 
-                                            key={index} 
-                                            className={`border border-gray-1200 px-4 py-2 bg-gray-1400`}
-                                        >
-                                            {header || ' '}
-                                        </th>
-                                    ))}
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {feesTable.table?.rows.slice(1).map((row: { cells: string[] }, rowIndex: number) => (
-                                    <tr key={rowIndex} className={rowIndex % 2 === 0 ? 'bg-gray-1400' : ''}>
-                                        {row.cells.map((cell: string, cellIndex: number) => (
-                                            <td 
-                                                key={cellIndex} 
-                                                className={`border border-gray-1200 px-4 py-2 text-sm font-medium text-blue-1300`}
+            <div className={`mt-12 ${fees?.feesTables?.length > 1 ? 'grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8' : 'max-w-4xl mx-auto'}`}>
+                {fees?.feesTables?.map((feesTable: { title: string; table: { rows: { cells: string[] }[] } }, index: number) => {
+                    // Check if first row is a duplicate of the title (common in CMS data)
+                    const firstRow = feesTable.table?.rows[0];
+
+                    // More aggressive normalization: remove all special chars and spaces
+                    const normalizeText = (text: string) =>
+                        text?.toUpperCase().replace(/[^A-Z0-9]/g, '') || '';
+
+                    const firstRowText = normalizeText(firstRow?.cells[0]);
+                    const titleText = normalizeText(feesTable.title);
+
+                    // Also check if first row only has content in first cell (typical for headers)
+                    const firstRowOnlyFirstCell = firstRow?.cells.length > 1 &&
+                        firstRow.cells.slice(1).every(cell => !cell || cell.trim() === '');
+
+                    const isDuplicateHeader = (firstRowText && titleText && (
+                        firstRowText === titleText ||
+                        firstRowText.includes(titleText) ||
+                        titleText.includes(firstRowText)
+                    )) || firstRowOnlyFirstCell;
+
+                    // If first row is duplicate header, skip it. Otherwise check if it's column headers
+                    const hasColumnHeaders = !isDuplicateHeader && firstRow?.cells.length > 1 &&
+                        firstRow.cells.some(cell => cell && !cell.includes('£'));
+
+                    const dataStartIndex = isDuplicateHeader ? 1 : (hasColumnHeaders ? 1 : 0);
+
+                    return (
+                    <div key={index} className="group relative bg-gradient-to-br from-white to-blue-50/30 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden">
+                        {/* Table Title Card Header */}
+                        {feesTable.title && (
+                            <div className="bg-gradient-to-r from-blue-1000 to-blue-900 px-6 py-4">
+                                <h3 className="text-white font-bold text-lg">{feesTable.title}</h3>
+                            </div>
+                        )}
+
+                        {/* Decorative Corner */}
+                        <div className="absolute top-0 right-0 w-20 h-20 bg-blue-100/20 rounded-bl-full"></div>
+
+                        <div className="p-6">
+                            <table className="w-full">
+                                {hasColumnHeaders && (
+                                <thead>
+                                    <tr className="border-b-2 border-blue-200/60">
+                                        {feesTable.table?.rows[0]?.cells.map((header: string, index: number) => (
+                                            <th
+                                                key={index}
+                                                className="text-left pb-4 px-2 font-bold text-gray-800 text-xs uppercase tracking-wider"
                                             >
-                                                {cell || ' '}
-                                            </td>
+                                                {header || ' '}
+                                            </th>
                                         ))}
                                     </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                                </thead>
+                                )}
+                                <tbody>
+                                    {feesTable.table?.rows.slice(dataStartIndex).map((row: { cells: string[] }, rowIndex: number) => {
+                                        // Check if this is a section header (has label but no values)
+                                        const hasOnlyLabel = row.cells[0] && row.cells.slice(1).every(cell => !cell || cell.trim() === '');
+
+                                        if (hasOnlyLabel) {
+                                            return (
+                                                <tr key={rowIndex} className="bg-gradient-to-r from-blue-50/50 via-blue-50/30 to-transparent">
+                                                    <td
+                                                        colSpan={row.cells.length}
+                                                        className="px-4 py-4 text-base font-bold text-blue-900 border-b-2 border-blue-100"
+                                                    >
+                                                        {row.cells[0]}
+                                                    </td>
+                                                </tr>
+                                            );
+                                        }
+
+                                        return (
+                                        <tr
+                                            key={rowIndex}
+                                            className={`border-b border-gray-100 hover:bg-blue-50/40 transition-colors duration-200 ${
+                                                rowIndex % 2 === 0 ? 'bg-gray-50/20' : 'bg-white'
+                                            }`}
+                                        >
+                                            {row.cells.map((cell: string, cellIndex: number) => {
+                                                const isLabel = cellIndex === 0;
+                                                const isPrice = cell?.includes('£');
+
+                                                if (isLabel) {
+                                                    return (
+                                                        <td
+                                                            key={cellIndex}
+                                                            className="px-4 py-3.5 text-sm font-medium text-gray-700 bg-gradient-to-r from-gray-50 to-transparent border-r border-gray-100"
+                                                        >
+                                                            <span className="block leading-relaxed">
+                                                                {cell || ' '}
+                                                            </span>
+                                                        </td>
+                                                    );
+                                                }
+
+                                                return (
+                                                    <td
+                                                        key={cellIndex}
+                                                        className={`px-4 py-3.5 text-base leading-relaxed ${
+                                                            isPrice
+                                                                ? 'font-semibold text-blue-1000 tabular-nums'
+                                                                : 'font-semibold text-gray-700'
+                                                        }`}
+                                                    >
+                                                        {cell || ' '}
+                                                    </td>
+                                                );
+                                            })}
+                                        </tr>
+                                        );
+                                    })}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        {/* Bottom accent bar */}
+                        <div className="h-1 bg-gradient-to-r from-blue-1000 via-blue-500 to-blue-1000 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
                     </div>
-                ))}
+                    );
+                })}
             </div>
           )}
         </div>
