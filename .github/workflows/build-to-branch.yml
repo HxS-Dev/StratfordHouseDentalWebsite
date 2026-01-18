@@ -1,0 +1,35 @@
+name: Build and Deploy to Build Branch
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+
+      - name: Deploy build output to build branch
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: build
+          folder: .next
+          clean: true
+          commit-message: 'Deploy build output to build branch'
+          single-commit: true
