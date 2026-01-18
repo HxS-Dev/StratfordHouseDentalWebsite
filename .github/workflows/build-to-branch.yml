@@ -25,11 +25,14 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Deploy build output to build branch
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: build
-          folder: .next
-          clean: true
-          commit-message: 'Deploy build output to build branch'
-          single-commit: true
+      - name: Commit and push build output to build branch
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git fetch origin build || true
+          git switch build || git checkout --orphan build
+          git rm -rf .
+          cp -r .next/* .
+          git add .
+          git commit -m "Build output from master" || echo "No changes to commit"
+          git push origin build --force
