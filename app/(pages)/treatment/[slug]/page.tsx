@@ -30,13 +30,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 }
 
-export async function generateStaticParams() {
-  const slugs = await sanityClient.fetch(`*[_type == "treatments"]{ "slug": slug.current }`);
-
-  return slugs.map((slug: { slug: string }) => ({
-    slug: slug.slug,
-  }));
-}
+export const dynamic = 'force-dynamic';
 
 const components: PortableTextComponents = {
   block: {

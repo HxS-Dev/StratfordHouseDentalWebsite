@@ -13,12 +13,7 @@ type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
-export async function generateStaticParams() {
-  const slugs = await sanityClient.fetch(`*[_type == "article"]{ "slug": slug.current }`);
-  return slugs.map((slug: { slug: string }) => ({
-    slug: slug.slug,
-  }));
-}
+export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const resolvedParams = await params; // Resolve the Promise
@@ -125,7 +120,7 @@ export default async function ArticlePage({ params }: PageProps) {
           )}
          {article?.richText_row_2 && (
           <div className='prose max-w-none prose-right flex flex-col items-start justify-center relative lg:py-12 py-8'>
-            {article?.body && <PortableText value={article.richText_row_2} components={components} />}
+            <PortableText value={article.richText_row_2} components={components} />
           </div>
              )}
           {article?.richText_row_3 && (
@@ -135,7 +130,7 @@ export default async function ArticlePage({ params }: PageProps) {
           )}
             {article?.richText_row_4 && (
           <div className='prose max-w-none prose-right flex flex-col items-start justify-center relative lg:py-12 py-8'>
-            {article?.body && <PortableText value={article.richText_row_4} components={components} />}
+            <PortableText value={article.richText_row_4} components={components} />
           </div>
              )}
         </div>

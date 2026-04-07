@@ -12,6 +12,8 @@ type TitlePart = {
 const exampleTitleParts: TitlePart[] = [
      { tag: "h1", text: "Articles Of Interest" },
 ];
+export const dynamic = 'force-dynamic';
+
 async function page() {
      const articles = await sanityClient.fetch(allArticleQuery);
 
