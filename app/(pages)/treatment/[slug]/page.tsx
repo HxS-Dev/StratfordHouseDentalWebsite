@@ -8,13 +8,6 @@ import Header from '@/app/components/Header'
 import { PortableText } from '@portabletext/react'
 import { PortableTextComponents } from '@portabletext/react'
 import AccordionBlockDynamic from '@/components/AccordionBlockDynamic';
-import dynamic from 'next/dynamic';
-
-// Remove PageTransition import and usage
-// const PageTransition = dynamic(() => import('@/components/PageTransition'), { ssr: false });
-
-// Add a client-side wrapper for scroll animation
-// const ScrollReveal = dynamic(() => import('@/components/ui/ScrollReveal'));
 
 type PageProps = {
   params: Promise<{ slug: string }>;
