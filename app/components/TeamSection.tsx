@@ -89,7 +89,7 @@ export default function TeamSection({ team }: TeamSectionProps) {
               <h6 className='text-lg leading-7 font-normal mb-4 text-blue-1000'>
                 {member.position || 'Position'}
               </h6>
-              {member.gdn_no && (
+              {member.gdn_no && member.gdn_no > 0 && (
                 <span className='text-base font-normal leading-6 text-tertiary-600'>
                   GDC No: {member.gdn_no}
                 </span>

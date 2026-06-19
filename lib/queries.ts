@@ -1,12 +1,18 @@
-export const allTeamQuery =`*[_type == "team"] | order(publishedAt desc){
+export const allTeamQuery =`*[_type == "team"] | order(order asc, _createdAt asc){
   _id,
   title,
   slug,
   position,
   gdn_no,
-  mainImage,
-  publishedAt,
-  body
+  mainImage{
+    asset->{
+      _id,
+      url
+    },
+    alt
+  },
+  body,
+  order
 }`;
 
 export const allArticleQuery =`*[_type == "post"] | order(publishedAt desc){
