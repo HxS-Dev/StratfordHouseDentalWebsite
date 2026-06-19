@@ -13,7 +13,6 @@ import {orderableDocumentListDeskItem} from '@sanity/orderable-document-list'
 // Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
 import {apiVersion, dataset, projectId} from './sanity/env'
 import {schema} from './sanity/schemaTypes'
-import {structure} from './sanity/structure'
 
 const singletonActions = new Set(['publish', 'discardChanges', 'restore'])
 const singletonTypes = new Set(['siteSettings'])
