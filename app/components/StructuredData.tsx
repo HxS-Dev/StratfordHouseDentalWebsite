@@ -1,4 +1,4 @@
-export default function StructuredData() {
+export default function StructuredData(): React.ReactElement {
   const dentalPracticeSchema = {
     "@context": "https://schema.org",
     "@type": "Dentist",
@@ -20,8 +20,8 @@ export default function StructuredData() {
     },
     "geo": {
       "@type": "GeoCoordinates",
-      "latitude": "52.0644",
-      "longitude": "-0.8100"
+      "latitude": 52.0644,
+      "longitude": -0.8100
     },
     "openingHoursSpecification": [
       {
@@ -54,8 +54,8 @@ export default function StructuredData() {
     ],
     "aggregateRating": {
       "@type": "AggregateRating",
-      "ratingValue": "4.8",
-      "reviewCount": "50"
+      "ratingValue": 4.8,
+      "reviewCount": 50
     },
     "sameAs": []
   };
