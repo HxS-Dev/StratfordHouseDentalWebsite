@@ -141,3 +141,17 @@ export const siteSettingsQuery = `*[_type == "siteSettings"][0]{
     alt
   }
 }`;
+
+export const trustedPartnersQuery = `*[_type == "trustedPartner"] | order(order asc) {
+  _id,
+  name,
+  logo{
+    asset->{
+      _id,
+      url
+    },
+    alt
+  },
+  websiteUrl,
+  description
+}`;

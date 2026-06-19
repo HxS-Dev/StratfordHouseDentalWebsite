@@ -7,14 +7,16 @@ import Testimonails from "./components/Testimonails";
 import Treatment from "./components/Treatment";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { bookingLinkQuery, siteSettingsQuery } from "@/lib/queries";
+import { bookingLinkQuery, siteSettingsQuery, trustedPartnersQuery } from "@/lib/queries";
 import { sanityClient } from "@/lib/sanity";
 import { urlFor } from "@/lib/imageBuilder";
+import TrustedPartners from "./components/TrustedPartners";
 
 export default function Home() {
   const [bookingLink, setBookingLink] = useState("");
   const [heroImage, setHeroImage] = useState("");
   const [heroImageAlt, setHeroImageAlt] = useState("");
+  const [partners, setPartners] = useState([]);
 
   useEffect(() => {
     const fetchLink = async () => {
@@ -30,8 +32,14 @@ export default function Home() {
       }
     };
 
+    const fetchPartners = async () => {
+      const data = await sanityClient.fetch(trustedPartnersQuery);
+      setPartners(data || []);
+    };
+
     fetchLink();
     fetchSettings();
+    fetchPartners();
   }, []);
 
   return (
@@ -211,14 +219,7 @@ export default function Home() {
           </div>
         </div>
       </motion.section>
-      <section className="bg-gray-1400 md:block hidden py-16">
-        <div className="xl:max-w-[1270px] max-w-[952px]  relative md:px-5 px-4 mx-auto">
-          <div className="bg-white py-12 px-8">
-            <h2 className="text-center text-[32px] font-medium leading-[125%] text-grayscale-900 mb-6">Trusted Partners & Accreditations</h2>
-            <img src="images/logos-img.png" alt="" />
-          </div>
-        </div>
-      </section>
+      <TrustedPartners partners={partners} />
       <Footer></Footer>
     </>
   );
