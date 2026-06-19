@@ -4,8 +4,9 @@ import Footer from '@/app/components/Footer';
 import Header from '@/app/components/Header';
 import HeroSec from '@/app/components/HeroSec';
 import TeamSection from '@/app/components/TeamSection';
-import { allTeamQuery } from '@/lib/queries';
+import { allTeamQuery, siteSettingsQuery } from '@/lib/queries';
 import { sanityClient } from '@/lib/sanity';
+import { urlFor } from "@/lib/imageBuilder";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
@@ -21,12 +22,23 @@ const exampleTitleParts: TitlePart[] = [
 export default function About() {
   const [team, setTeam] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [aboutImage, setAboutImage] = useState("");
+  const [aboutImageAlt, setAboutImageAlt] = useState("");
 
   useEffect(() => {
-    sanityClient.fetch(allTeamQuery).then((data) => {
-      setTeam(data);
+    const fetchData = async () => {
+      const teamData = await sanityClient.fetch(allTeamQuery);
+      setTeam(teamData);
+
+      const settings = await sanityClient.fetch(siteSettingsQuery);
+      if (settings?.aboutHeroImage) {
+        setAboutImage(urlFor(settings.aboutHeroImage).width(1270).url());
+        setAboutImageAlt(settings.aboutHeroImage.alt || "About Stratford House Dental Practice");
+      }
+
       setLoading(false);
-    });
+    };
+    fetchData();
   }, []);
   return (
     <>
@@ -40,7 +52,11 @@ export default function About() {
         transition={{ duration: 0.7 }}
       >
         <div className="xl:max-w-[1270px]  w-full max-w-[952px] relative md:px-5 px-4 mx-auto">
-          <img src="images/about-img2.png" className='md:mb-8 mb-6' alt="" />
+          <img
+            src={aboutImage || "/images/about-img2.png"}
+            className='md:mb-8 mb-6'
+            alt={aboutImageAlt || "About Stratford House Dental Practice"}
+          />
           <h2 className='md:text-[40px] text-2xl md:mb-[18px] mb-2.5 font-medium md:leading-[44px] leading-7 text-blue-1300'>About Our Surgery</h2>
           <p className='md:text-lg text-base max-w-[1142px] font-normal md:leading-7 leading-6 text-black'><strong>Stratford House Dental Practice</strong> is located in Wolverton, which is just outside the centre of Milton Keynes and is one of the oldest dental practices in Milton Keynes with its origins dating back to 1921.</p>
         </div>
