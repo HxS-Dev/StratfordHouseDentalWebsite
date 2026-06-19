@@ -14,6 +14,9 @@ import {apiVersion, dataset, projectId} from './sanity/env'
 import {schema} from './sanity/schemaTypes'
 import {structure} from './sanity/structure'
 
+const singletonActions = new Set(['publish', 'discardChanges', 'restore'])
+const singletonTypes = new Set(['siteSettings'])
+
 export default defineConfig({
   basePath: '/sanitycms',
   projectId,
@@ -27,4 +30,10 @@ export default defineConfig({
     visionTool({defaultApiVersion: apiVersion}),
     table(),
   ],
+  document: {
+    actions: (input, context) =>
+      singletonTypes.has(context.schemaType)
+        ? input.filter(({action}) => action && singletonActions.has(action))
+        : input,
+  },
 })

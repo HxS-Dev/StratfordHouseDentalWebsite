@@ -1,15 +1,20 @@
-import type {StructureResolver} from 'sanity/structure'
+import {CogIcon} from '@sanity/icons'
+import {StructureResolver} from 'sanity/structure'
 
-// https://www.sanity.io/docs/structure-builder-cheat-sheet
 export const structure: StructureResolver = (S) =>
   S.list()
-    .title('Stratford House Content Manager')
+    .title('Content')
     .items([
-      S.documentTypeListItem('post').title('News Articles'),
-      S.documentTypeListItem('category').title('Categories'),
-      S.documentTypeListItem('author').title('Authors'),
+      S.listItem()
+        .title('Site Settings')
+        .icon(CogIcon)
+        .child(
+          S.document()
+            .schemaType('siteSettings')
+            .documentId('siteSettings')
+        ),
       S.divider(),
       ...S.documentTypeListItems().filter(
-        (item) => item.getId() && !['post', 'category', 'author'].includes(item.getId()!),
+        (item) => item.getId() !== 'siteSettings'
       ),
     ])
