@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Sitemap: https://stratfordhousedentalpractice.co.uk/sitemap.xml
+
+User-agent: *
+Disallow: /api/
+Disallow: /sanity/
+Disallow: /sanitycms/
