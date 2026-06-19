@@ -13,7 +13,8 @@ import {accordionType} from './accordionType'
 import { bookingLink } from './bookingLink'
 import {testimonialsType} from './testimonialsType'
 import {siteSettings} from './siteSettings'
+import {trustedPartner} from './trustedPartner'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [blockContentType, categoryType, postType, authorType, Team, treatmentsType, treatmentsCategoryType, calloutType, accordionType, Fees, bookingLink, testimonialsType, siteSettings],
+  types: [blockContentType, categoryType, postType, authorType, Team, treatmentsType, treatmentsCategoryType, calloutType, accordionType, Fees, bookingLink, testimonialsType, siteSettings, trustedPartner],
 }
