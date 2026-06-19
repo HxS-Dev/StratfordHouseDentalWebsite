@@ -7,18 +7,31 @@ import Testimonails from "./components/Testimonails";
 import Treatment from "./components/Treatment";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { bookingLinkQuery } from "@/lib/queries";
+import { bookingLinkQuery, siteSettingsQuery } from "@/lib/queries";
 import { sanityClient } from "@/lib/sanity";
+import { urlFor } from "@/lib/imageBuilder";
 
 export default function Home() {
   const [bookingLink, setBookingLink] = useState("");
+  const [heroImage, setHeroImage] = useState("");
+  const [heroImageAlt, setHeroImageAlt] = useState("");
 
   useEffect(() => {
     const fetchLink = async () => {
       const data = await sanityClient.fetch(bookingLinkQuery);
       setBookingLink(data?.bookingLink || "");
     };
+
+    const fetchSettings = async () => {
+      const data = await sanityClient.fetch(siteSettingsQuery);
+      if (data?.homeHeroImage) {
+        setHeroImage(urlFor(data.homeHeroImage).width(600).url());
+        setHeroImageAlt(data.homeHeroImage.alt || "Stratford House Dental Practice hero");
+      }
+    };
+
     fetchLink();
+    fetchSettings();
   }, []);
 
   return (
@@ -58,10 +71,10 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.4 }}
             >
               <div className="lg:absolute xl:max-w-full md:mb-0 -mb-1.5 lg:mr-0 md:-mr-5 lg:max-w-[600px] text-end -bottom-9 right-0">
-                <img 
-                  src="images/hero-img.png" 
-                  className="inline-block" 
-                  alt="" 
+                <img
+                  src={heroImage || "/images/hero-img.png"}
+                  className="inline-block"
+                  alt={heroImageAlt || "Stratford House Dental Practice"}
                 />
                 <div className="absolute right-0 bottom-0 z-10">
                   <img src="images/cube-img.svg" className="md:w-auto w-[123px]" alt="" />

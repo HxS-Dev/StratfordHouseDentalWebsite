@@ -124,3 +124,20 @@ export const allTestimonialsQuery = `*[_type == "testimonials" && isActive == tr
   order,
   publishedAt
 }`;
+
+export const siteSettingsQuery = `*[_type == "siteSettings"][0]{
+  homeHeroImage{
+    asset->{
+      _id,
+      url
+    },
+    alt
+  },
+  aboutHeroImage{
+    asset->{
+      _id,
+      url
+    },
+    alt
+  }
+}`;
