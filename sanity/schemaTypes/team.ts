@@ -24,7 +24,9 @@ export const Team = defineType({
     }),
     defineField({
       name: 'gdn_no',
+      title: 'GDC Number',
       type: 'number',
+      description: 'General Dental Council registration number (optional)',
     }),
     // defineField({
     //   name: 'author',
@@ -58,6 +60,13 @@ export const Team = defineType({
       name: 'body',
       type: 'blockContent',
     }),
+    defineField({
+      name: 'order',
+      title: 'Display Order',
+      type: 'number',
+      hidden: true,
+      initialValue: 999,
+    }),
   ],
   preview: {
     select: {
@@ -70,4 +79,16 @@ export const Team = defineType({
       return {...selection, subtitle: author && `by ${author}`}
     },
   },
+  orderings: [
+    {
+      title: 'Manual Order',
+      name: 'manualOrder',
+      by: [{field: 'order', direction: 'asc'}],
+    },
+    {
+      title: 'Newest First',
+      name: 'newestFirst',
+      by: [{field: '_createdAt', direction: 'desc'}],
+    },
+  ],
 })

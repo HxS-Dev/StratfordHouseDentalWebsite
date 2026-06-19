@@ -43,8 +43,14 @@ export default defineConfig({
               S,
               context,
             }),
+            orderableDocumentListDeskItem({
+              type: 'team',
+              title: 'Team Members',
+              S,
+              context,
+            }),
             ...S.documentTypeListItems().filter(
-              (item) => !['siteSettings', 'trustedPartner'].includes(item.getId()!)
+              (item) => !['siteSettings', 'trustedPartner', 'team'].includes(item.getId()!)
             ),
           ])
       },
