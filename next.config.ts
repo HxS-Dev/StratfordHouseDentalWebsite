@@ -9,6 +9,13 @@ const nextConfig: NextConfig = {
   },
   // Disable source maps in production to reduce memory
   productionBrowserSourceMaps: false,
+  // Optimize output for deployment
+  output: 'standalone',
+  // Minimize build time and memory
+  swcMinify: true,
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
 };
 
 export default nextConfig;
