@@ -44,9 +44,9 @@ export const trustedPartner = defineType({
       description: 'Brief description of partnership (optional)',
     }),
     defineField({
-      name: 'order',
+      name: 'orderRank',
       title: 'Display Order',
-      type: 'number',
+      type: 'string',
       hidden: true,
     }),
   ],
@@ -54,7 +54,7 @@ export const trustedPartner = defineType({
     {
       title: 'Manual Order',
       name: 'manualOrder',
-      by: [{field: 'order', direction: 'asc'}],
+      by: [{field: 'orderRank', direction: 'asc'}],
     },
   ],
 })

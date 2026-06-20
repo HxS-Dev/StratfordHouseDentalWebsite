@@ -61,11 +61,10 @@ export const Team = defineType({
       type: 'blockContent',
     }),
     defineField({
-      name: 'order',
+      name: 'orderRank',
       title: 'Display Order',
-      type: 'number',
+      type: 'string',
       hidden: true,
-      initialValue: 999,
     }),
   ],
   preview: {
@@ -83,7 +82,7 @@ export const Team = defineType({
     {
       title: 'Manual Order',
       name: 'manualOrder',
-      by: [{field: 'order', direction: 'asc'}],
+      by: [{field: 'orderRank', direction: 'asc'}],
     },
     {
       title: 'Newest First',

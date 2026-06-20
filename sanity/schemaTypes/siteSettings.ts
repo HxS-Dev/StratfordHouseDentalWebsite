@@ -8,27 +8,10 @@ export const siteSettings = defineType({
   icon: CogIcon,
   fields: [
     defineField({
-      name: 'homeHeroImage',
-      title: 'Home Page Hero Image',
+      name: 'homeAboutImage',
+      title: 'Homepage About Us Section Image',
       type: 'image',
-      description: 'Main image displayed on homepage hero section',
-      options: {
-        hotspot: true,
-      },
-      fields: [
-        defineField({
-          name: 'alt',
-          type: 'string',
-          title: 'Alternative text',
-          description: 'Describe the image for accessibility',
-        }),
-      ],
-    }),
-    defineField({
-      name: 'aboutHeroImage',
-      title: 'About Page Hero Image',
-      type: 'image',
-      description: 'Main image displayed on about page hero section',
+      description: 'Image displayed in the About Us section on the homepage',
       options: {
         hotspot: true,
       },

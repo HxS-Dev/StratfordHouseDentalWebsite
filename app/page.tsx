@@ -26,9 +26,9 @@ export default function Home() {
 
     const fetchSettings = async () => {
       const data = await sanityClient.fetch(siteSettingsQuery);
-      if (data?.homeHeroImage) {
-        setHeroImage(urlFor(data.homeHeroImage).width(600).url());
-        setHeroImageAlt(data.homeHeroImage.alt || "Stratford House Dental Practice hero");
+      if (data?.homeAboutImage) {
+        setHeroImage(urlFor(data.homeAboutImage).width(800).url());
+        setHeroImageAlt(data.homeAboutImage.alt || "About Stratford House Dental Practice");
       }
     };
 

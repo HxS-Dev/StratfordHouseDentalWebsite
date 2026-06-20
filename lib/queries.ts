@@ -132,14 +132,7 @@ export const allTestimonialsQuery = `*[_type == "testimonials" && isActive == tr
 }`;
 
 export const siteSettingsQuery = `*[_type == "siteSettings"][0]{
-  homeHeroImage{
-    asset->{
-      _id,
-      url
-    },
-    alt
-  },
-  aboutHeroImage{
+  homeAboutImage{
     asset->{
       _id,
       url
