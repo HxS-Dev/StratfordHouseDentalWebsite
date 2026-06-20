@@ -1,4 +1,4 @@
-export const allTeamQuery =`*[_type == "team"] | order(order asc, _createdAt asc){
+export const allTeamQuery =`*[_type == "team"] | order(orderRank asc, _createdAt asc){
   _id,
   title,
   slug,
@@ -12,7 +12,7 @@ export const allTeamQuery =`*[_type == "team"] | order(order asc, _createdAt asc
     alt
   },
   body,
-  order
+  orderRank
 }`;
 
 export const allArticleQuery =`*[_type == "post"] | order(publishedAt desc){
@@ -141,7 +141,7 @@ export const siteSettingsQuery = `*[_type == "siteSettings"][0]{
   }
 }`;
 
-export const trustedPartnersQuery = `*[_type == "trustedPartner"] | order(order asc) {
+export const trustedPartnersQuery = `*[_type == "trustedPartner"] | order(orderRank asc) {
   _id,
   name,
   logo{

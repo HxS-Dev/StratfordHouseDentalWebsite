@@ -25,10 +25,17 @@ export default function Home() {
     };
 
     const fetchSettings = async () => {
-      const data = await sanityClient.fetch(siteSettingsQuery);
-      if (data?.homeAboutImage) {
-        setHeroImage(urlFor(data.homeAboutImage).width(800).url());
-        setHeroImageAlt(data.homeAboutImage.alt || "About Stratford House Dental Practice");
+      try {
+        const data = await sanityClient.fetch(siteSettingsQuery);
+        console.log('Site settings data:', data);
+        if (data?.homeAboutImage?.asset) {
+          setHeroImage(urlFor(data.homeAboutImage).width(800).url());
+          setHeroImageAlt(data.homeAboutImage.alt || "About Stratford House Dental Practice");
+        } else {
+          console.warn('No homeAboutImage found in site settings');
+        }
+      } catch (error) {
+        console.error('Error fetching site settings:', error);
       }
     };
 
