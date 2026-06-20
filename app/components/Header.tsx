@@ -37,11 +37,6 @@ function Header() {
                               } lg:flex  lg:static absolute top-20 left-0 lg:p-0 py-10 p-4 w-full z-[99] lg:bg-transparent bg-gray-1000 gap-8 justify-end transition-all duration-300`}>
                               <ul className="lg:flex items-center xl:gap-10 gap-5 space-y-4 lg:space-y-0">
                                    <li className="w-full lg:w-auto">
-                                        <Link className={`text-lg font-medium leading-6 block transition-all duration-300 rounded-md px-2 ${pathname === '/' ? 'bg-blue-1000 text-white shadow-md' : 'text-black hover:bg-blue-50 hover:text-blue-1000'}`} href="/">
-                                        Home
-                                        </Link>
-                                   </li>
-                                   <li className="w-full lg:w-auto">
                                         <Link className={`text-lg font-medium leading-6 block transition-all duration-300 rounded-md px-2 ${pathname.startsWith('/about') ? 'bg-blue-1000 text-white shadow-md' : 'text-black hover:bg-blue-50 hover:text-blue-1000'}`} href="/about">
                                         About Us
                                         </Link>
