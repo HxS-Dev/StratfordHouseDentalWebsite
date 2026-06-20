@@ -129,7 +129,11 @@ export default function Home() {
           <div className="flex lg:flex-nowrap flex-wrap md:gap-5 gap-[54px] items-center">
             <div className="lg:w-1/2 w-full">
               <div className="relative xl:ml-0 md:-ml-10 float-end z-10">
-                <img src="images/about-img.png" className="xl:max-w-[inherit]" alt="" />
+                <img
+                  src={heroImage || "images/about-img.png"}
+                  className="xl:max-w-[inherit]"
+                  alt={heroImageAlt || "About Stratford House Dental"}
+                />
                 <div className="absolute -z-10 xl:-bottom-9 md:-bottom-5 -bottom-2 xl:right-[-46px] md:-right-4 -right-2">
                   <img src="images/line-pattern.svg" className="xl:w-auto md:w-[155px] w-[141px]" alt="" />
                 </div>
