@@ -14,8 +14,8 @@ import TrustedPartners from "./components/TrustedPartners";
 
 export default function Home() {
   const [bookingLink, setBookingLink] = useState("");
-  const [heroImage, setHeroImage] = useState("");
-  const [heroImageAlt, setHeroImageAlt] = useState("");
+  const [aboutImage, setAboutImage] = useState("");
+  const [aboutImageAlt, setAboutImageAlt] = useState("");
   const [partners, setPartners] = useState([]);
 
   useEffect(() => {
@@ -29,8 +29,8 @@ export default function Home() {
         const data = await sanityClient.fetch(siteSettingsQuery);
         console.log('Site settings data:', data);
         if (data?.homeAboutImage?.asset) {
-          setHeroImage(urlFor(data.homeAboutImage).width(800).url());
-          setHeroImageAlt(data.homeAboutImage.alt || "About Stratford House Dental Practice");
+          setAboutImage(urlFor(data.homeAboutImage).width(800).url());
+          setAboutImageAlt(data.homeAboutImage.alt || "About Stratford House Dental Practice");
         } else {
           console.warn('No homeAboutImage found in site settings');
         }
@@ -87,9 +87,9 @@ export default function Home() {
             >
               <div className="lg:absolute xl:max-w-full md:mb-0 -mb-1.5 lg:mr-0 md:-mr-5 lg:max-w-[600px] text-end -bottom-9 right-0">
                 <img
-                  src={heroImage || "/images/hero-img.png"}
+                  src="/images/hero-img.png"
                   className="inline-block"
-                  alt={heroImageAlt || "Stratford House Dental Practice"}
+                  alt="Stratford House Dental Practice"
                 />
                 <div className="absolute right-0 bottom-0 z-10">
                   <img src="images/cube-img.svg" className="md:w-auto w-[123px]" alt="" />
@@ -130,9 +130,9 @@ export default function Home() {
             <div className="lg:w-1/2 w-full">
               <div className="relative xl:ml-0 md:-ml-10 float-end z-10">
                 <img
-                  src={heroImage || "images/about-img.png"}
+                  src={aboutImage || "images/about-img.png"}
                   className="xl:max-w-[inherit]"
-                  alt={heroImageAlt || "About Stratford House Dental"}
+                  alt={aboutImageAlt || "About Stratford House Dental"}
                 />
                 <div className="absolute -z-10 xl:-bottom-9 md:-bottom-5 -bottom-2 xl:right-[-46px] md:-right-4 -right-2">
                   <img src="images/line-pattern.svg" className="xl:w-auto md:w-[155px] w-[141px]" alt="" />
